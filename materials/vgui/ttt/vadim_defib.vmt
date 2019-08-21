@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+ "$basetexture" "VGUI/ttt/vadim_defib"
+ "$vertexcolor" 1
+ "$vertexalpha" 1
+ "$translucent" 1
+}
