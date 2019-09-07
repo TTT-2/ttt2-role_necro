@@ -92,15 +92,28 @@ else -- SERVER
 		rolesTable[ROLE_NECROMANCER] = 0
 	end)
 
+	-- is called if the role has been selected in the normal way of team setup
 	hook.Add("TTT2UpdateSubrole", "TTTHNecroGiveDeagle", function(ply, old, new)
 		if new == ROLE_NECROMANCER then
 			ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
-
-			ply:GiveItem("item_ttt_radar")
+			ply:GiveEquipmentItem("item_ttt_radar")
 		elseif old == ROLE_NECROMANCER then
 			ply:StripWeapon("weapon_ttth_necrodefi")
+			ply:RemoveEquipmentItem("item_ttt_radar")
 		end
 	end)
+
+	-- make sure that the necromancer always receives his loadout
+	hook.Add("PlayerSpawn", "RespawnNecromancer", function(ply) -- called on player (re-)spawn
+		-- this is an ugly workaround, since on calling of the player respawn hook, the player can not yet receive items
+		timer.Simple(0.1, function()
+			if GetRoundState() ~= ROUND_ACTIVE then return end
+			if ply:GetSubRole() ~= ROLE_SUPERVILLAIN then return end
+
+			ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
+			ply:GiveEquipmentItem("item_ttt_radar")
+		end)
+    end)
 
 	hook.Add("TTT2ModifySelectableRoles", "TTTHJesOrNecro", function(selectableRoles)
 		local necro = false
