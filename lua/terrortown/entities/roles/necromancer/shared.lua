@@ -108,7 +108,7 @@ else -- SERVER
 		-- this is an ugly workaround, since on calling of the player respawn hook, the player can not yet receive items
 		timer.Simple(0.1, function()
 			if GetRoundState() ~= ROUND_ACTIVE then return end
-			if ply:GetSubRole() ~= ROLE_SUPERVILLAIN then return end
+			if ply:GetSubRole() ~= ROLE_NECROMANCER then return end
 
 			ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
 			ply:GiveEquipmentItem("item_ttt_radar")
