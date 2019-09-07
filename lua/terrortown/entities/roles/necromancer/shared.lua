@@ -113,7 +113,7 @@ else -- SERVER
 			ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
 			ply:GiveEquipmentItem("item_ttt_radar")
 		end)
-    end)
+	end)
 
 	hook.Add("TTT2ModifySelectableRoles", "TTTHJesOrNecro", function(selectableRoles)
 		local necro = false
