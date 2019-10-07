@@ -6,30 +6,52 @@ ROLE.Base = "ttt_role_base"
 
 local maxhealth = CreateConVar("ttt2_zomb_maxhealth_new_zomb", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 
--- important to add roles with this function,
--- because it does more than just access the array ! e.g. updating other arrays
--- this role doesn't have a team
-ROLE.color = Color(68, 28, 44, 255) -- ...
-ROLE.dkcolor = Color(32, 3, 15, 255) -- ...
-ROLE.bgcolor = Color(53, 72, 30, 255) -- ...
-ROLE.abbr = "zomb" -- abbreviation
-ROLE.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-ROLE.surviveBonus = 1 -- bonus multiplier for every survive while another player was killed
-ROLE.scoreKillsMultiplier = 5 -- multiplier for kill of player of another team
-ROLE.scoreTeamKillsMultiplier = -16 -- multiplier for teamkill
-ROLE.notSelectable = true -- role cant be selected!
-ROLE.preventFindCredits = true
-ROLE.preventKillCredits = true
-ROLE.preventTraitorAloneCredits = true
+function ROLE:PreInitialize()
+	self.color = Color(68, 28, 44, 255)
+	self.dkcolor = Color(32, 3, 15, 255)
+	self.bgcolor = Color(53, 72, 30, 255)
 
--- now link this subrole with its baserole
-hook.Add("TTT2BaseRoleInit", "TTT2ConBRnWithZrole", function()
-	ZOMBIE:SetBaseRole(ROLE_NECROMANCER)
-end)
+	self.abbr = "zomb"
+	self.surviveBonus = 1
+	self.scoreKillsMultiplier = 5
+	self.scoreTeamKillsMultiplier = -16
+	self.notSelectable = true
+	self.preventFindCredits = true
+	self.preventKillCredits = true
+	self.preventTraitorAloneCredits = true
 
-hook.Add("TTT2RolesLoaded", "AddZombTeam", function()
-	ZOMBIE.defaultTeam = TEAM_NECROMANCER
-end)
+	self.defaultTeam = TEAM_NECROMANCER
+	self.defaultEquipment = SPECIAL_EQUIPMENT
+
+	self.conVarData = {
+		pct = 0.15, -- necessary: percentage of getting this role selected (per player)
+		maximum = 2, -- maximum amount of roles in a round
+		minPlayers = 7, -- minimum amount of players until this role is able to get selected
+		credits = 1, -- the starting credits of a specific role
+		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
+		shopFallback = SHOP_FALLBACK_TRAITOR
+	}
+end
+
+function ROLE:Initialize()
+	roles.SetBaseRole(self, ROLE_NECROMANCER)
+
+	if CLIENT then
+		-- Role specific language elements
+		LANG.AddToLanguage("English", ZOMBIE.name, "Zombie")
+		LANG.AddToLanguage("English", "target_" .. ZOMBIE.name, "Zombie")
+		LANG.AddToLanguage("English", "ttt2_desc_" .. ZOMBIE.name, [[You need to win with your mate!]])
+		LANG.AddToLanguage("English", "body_found_" .. ZOMBIE.abbr, "They were a Zombie!")
+		LANG.AddToLanguage("English", "search_role_" .. ZOMBIE.abbr, "This person was a Zombie!")
+
+		LANG.AddToLanguage("Deutsch", ZOMBIE.name, "Zombie")
+		LANG.AddToLanguage("Deutsch", "target_" .. ZOMBIE.name, "Zombie")
+		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. ZOMBIE.name, [[Du musst mit deinem Mate gewinnen!]])
+		LANG.AddToLanguage("Deutsch", "body_found_" .. ZOMBIE.abbr, "Er war ein Zombie...")
+		LANG.AddToLanguage("Deutsch", "search_role_" .. ZOMBIE.abbr, "Diese Person war ein Zombie!")
+	end
+end
+
 
 hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
 	tbl[ROLE_ZOMBIE] = tbl[ROLE_ZOMBIE] or {}
@@ -37,26 +59,7 @@ hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
 	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_maxhealth_new_zomb", slider = true, min = 10, max = 500, desc = "Max Health for all new Zombies (Def. 100)"})
 end)
 
-if CLIENT then -- just on client!
-	hook.Add("TTT2FinishedLoading", "ZombInitT", function() -- if sync of roles has finished
-		-- setup here is not necessary but if you want to access the role data, you need to start here
-		-- setup basic translation !
-		LANG.AddToLanguage("English", ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("English", "target_" .. ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("English", "ttt2_desc_" .. ZOMBIE.name, [[You need to win with your mate!]])
-		LANG.AddToLanguage("English", "body_found_" .. ZOMBIE.abbr, "They were a Zombie!")
-		LANG.AddToLanguage("English", "search_role_" .. ZOMBIE.abbr, "This person was a Zombie!")
-
-		---------------------------------
-
-		-- maybe this language as well...
-		LANG.AddToLanguage("Deutsch", ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("Deutsch", "target_" .. ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. ZOMBIE.name, [[Du musst mit deinem Mate gewinnen!]])
-		LANG.AddToLanguage("Deutsch", "body_found_" .. ZOMBIE.abbr, "Er war ein Zombie...")
-		LANG.AddToLanguage("Deutsch", "search_role_" .. ZOMBIE.abbr, "Diese Person war ein Zombie!")
-	end)
-else -- SERVER
+if SERVER then -- SERVER
 	zombie_sound_idles = {
 		"npc/zombie/zombie_voice_idle1.wav",
 		"npc/zombie/zombie_voice_idle2.wav",

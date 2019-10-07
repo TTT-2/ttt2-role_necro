@@ -4,55 +4,40 @@ end
 
 ROLE.Base = "ttt_role_base"
 
-ROLE.color = Color(131, 55, 85, 255) -- ...
-ROLE.dkcolor = Color(73, 8, 33, 255) -- ...
-ROLE.bgcolor = Color(100, 137, 58, 255) -- ...
-ROLE.abbr = "necro" -- abbreviation
-ROLE.defaultEquipment = SPECIAL_EQUIPMENT -- here you can set up your own default equipment
-ROLE.surviveBonus = 0.2 -- bonus multiplier for every survive while another player was killed
-ROLE.scoreKillsMultiplier = 2 -- multiplier for kill of player of another team
-ROLE.scoreTeamKillsMultiplier = -4 -- multiplier for teamkill
-
--- creates global var "TEAM_NECROMANCER" and other required things
--- TEAM_[name], data: e.g. icon, color, ...
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_necro",
 	color = ROLE.color
 })
-ROLE.defaultTeam = TEAM_NECROMANCER -- the team name: roles with same team name are working together
 
-if SERVER then
-	-- Special Necromancer Radar, it only shows dead bodies
-	ROLE.CustomRadar = function(ply)
-		local targets = {}
-		local scan_ents = ents.FindByClass("prop_ragdoll")
+function ROLE:PreInitialize()
+	self.color = Color(131, 55, 85, 255)
+	self.dkcolor = Color(73, 8, 33, 255)
+	self.bgcolor = Color(100, 137, 58, 255)
 
-		for _, t in ipairs(scan_ents) do
-			local pos = t:LocalToWorld(t:OBBCenter())
+	self.abbr = "necro"
+	self.defaultEquipment = SPECIAL_EQUIPMENT
+	self.surviveBonus = 0.2
+	self.scoreKillsMultiplier = 2
+	self.scoreTeamKillsMultiplier = -4
 
-			pos.x = math.Round(pos.x)
-			pos.y = math.Round(pos.y)
-			pos.z = math.Round(pos.z)
+	self.defaultTeam = TEAM_NECROMANCER
+	self.defaultEquipment = SPECIAL_EQUIPMENT
 
-			table.insert(targets, {subrole = -1, pos = pos})
-		end
-
-		return targets
-	end
+	self.conVarData = {
+		pct = 0.15, -- necessary: percentage of getting this role selected (per player)
+		maximum = 1, -- maximum amount of roles in a round
+		minPlayers = 7, -- minimum amount of players until this role is able to get selected
+		random = 40, -- randomness of getting this role selected in a round
+		credits = 2, -- the starting credits of a specific role
+		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
+		shopFallback = SHOP_FALLBACK_TRAITOR
+	}
 end
 
-ROLE.conVarData = {
-	pct = 0.15, -- necessary: percentage of getting this role selected (per player)
-	maximum = 1, -- maximum amount of roles in a round
-	minPlayers = 7, -- minimum amount of players until this role is able to get selected
-	random = 40, -- randomness of getting this role selected in a round
-	credits = 2, -- the starting credits of a specific role
-	togglable = true, -- option to toggle a role for a client if possible (F1 menu)
-	shopFallback = "traitor"
-}
-
-if CLIENT then -- just on client!
-	hook.Add("TTT2FinishedLoading", "NecroInitT", function() -- if sync of roles has finished
+function ROLE:Initialize()
+	roles.SetBaseRole(self, ROLE_NECROMANCER)
+	
+	if CLIENT then
 		-- Role specific language elements
 		LANG.AddToLanguage("English", NECROMANCER.name, "Necromancer")
 		LANG.AddToLanguage("English", TEAM_NECROMANCER, "TEAM Necromancers")
@@ -75,8 +60,30 @@ if CLIENT then -- just on client!
 		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_NECROMANCER, "Der böse Geisterbeschwörer hat die Runde gewonnen!")
 		LANG.AddToLanguage("Deutsch", "target_" .. NECROMANCER.name, "Geisterbeschwörer")
 		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. NECROMANCER.name, [[Der Geisterbeschwörer muss tote Spieler wiederbeleben, um zu gewinnen. Wird ein Spieler wiederbelebt, wird er wie ein Zombie aussehen und sterben, sobald seine Munition leer ist.]])
-	end)
-else -- SERVER
+	end
+end
+
+if SERVER then
+	-- Special Necromancer Radar, it only shows dead bodies
+	ROLE.CustomRadar = function(ply)
+		local targets = {}
+		local scan_ents = ents.FindByClass("prop_ragdoll")
+
+		for _, t in ipairs(scan_ents) do
+			local pos = t:LocalToWorld(t:OBBCenter())
+
+			pos.x = math.Round(pos.x)
+			pos.y = math.Round(pos.y)
+			pos.z = math.Round(pos.z)
+
+			table.insert(targets, {subrole = -1, pos = pos})
+		end
+
+		return targets
+	end
+end
+
+if SERVER then
 	-- modify roles table of rolesetup addon
 	hook.Add("TTTAModifyRolesTable", "ModifyRoleNecroToInno", function(rolesTable)
 		local necromancers = rolesTable[ROLE_NECROMANCER]
