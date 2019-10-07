@@ -6,7 +6,7 @@ ROLE.Base = "ttt_role_base"
 
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_necro",
-	color = ROLE.color
+	color = Color(131, 55, 85, 255)
 })
 
 function ROLE:PreInitialize()
