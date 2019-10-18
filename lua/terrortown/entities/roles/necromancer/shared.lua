@@ -110,15 +110,10 @@ if SERVER then
 	hook.Add("TTT2ModifySelectableRoles", "TTTHJackOrNecro", function(selectableRoles)
 		if not selectableRoles[NECROMANCER] or not selectableRoles[JACKAL] then return end
 		
-		local rand = math.random(2)
-		if rand == 2 then
+		if math.random(2) == 2 then
 			selectableRoles[NECROMANCER] = nil
-			
-			print("[TTT2][INFO] Selected Necromancer (" .. rand .. ")")
 		else
 			selectableRoles[JACKAL] = nil
-			
-			print("[TTT2][INFO] Selected Jackal (" .. rand .. ")")
 		end
 	end)
 end
