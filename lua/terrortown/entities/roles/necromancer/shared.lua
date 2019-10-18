@@ -108,25 +108,17 @@ if SERVER then
 
 	-- make sure that jackal and necro can not spawn together
 	hook.Add("TTT2ModifySelectableRoles", "TTTHJackOrNecro", function(selectableRoles)
-		local necro = false
-		local jack = false
-
-		for rd in pairs(selectableRoles) do
-			if rd == NECROMANCER then
-				necro = true
-			end
-
-			if rd == JACKAL then
-				jack = true
-			end
-		end
-
-		if necro and jack then
-			if math.random(0, 1) == 1 then
-				selectableRoles[NECROMANCER] = nil
-			else
-				selectableRoles[JACKAL] = nil
-			end
+		if not selectableRoles[NECROMANCER] or not selectableRoles[JACKAL] then return end
+		
+		local rand = math.random(2)
+		if rand == 2 then
+			selectableRoles[NECROMANCER] = nil
+			
+			print("[TTT2][INFO] Selected Necromancer (" .. rand .. ")")
+		else
+			selectableRoles[JACKAL] = nil
+			
+			print("[TTT2][INFO] Selected Jackal (" .. rand .. ")")
 		end
 	end)
 end
