@@ -20,15 +20,6 @@ function ROLE:PreInitialize()
 
 	self.defaultTeam = TEAM_NECROMANCER
 	self.defaultEquipment = SPECIAL_EQUIPMENT
-
-	self.conVarData = {
-		pct = 0.15, -- necessary: percentage of getting this role selected (per player)
-		maximum = 2, -- maximum amount of roles in a round
-		minPlayers = 7, -- minimum amount of players until this role is able to get selected
-		credits = 1, -- the starting credits of a specific role
-		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
-		shopFallback = SHOP_FALLBACK_TRAITOR
-	}
 end
 
 function ROLE:Initialize()
