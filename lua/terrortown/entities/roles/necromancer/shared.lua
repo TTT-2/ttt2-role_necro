@@ -2,8 +2,6 @@ if SERVER then
 	AddCSLuaFile()
 end
 
-ROLE.Base = "ttt_role_base"
-
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_necro",
 	color = Color(131, 55, 85, 255)
@@ -34,10 +32,8 @@ function ROLE:PreInitialize()
 	}
 end
 
-function ROLE:Initialize()
-	roles.SetBaseRole(self, ROLE_NECROMANCER)
-	
-	if CLIENT then
+if CLIENT then
+	function ROLE:Initialize()
 		-- Role specific language elements
 		LANG.AddToLanguage("English", NECROMANCER.name, "Necromancer")
 		LANG.AddToLanguage("English", TEAM_NECROMANCER, "TEAM Necromancers")
@@ -61,29 +57,29 @@ function ROLE:Initialize()
 		LANG.AddToLanguage("Deutsch", "target_" .. NECROMANCER.name, "Geisterbeschwörer")
 		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. NECROMANCER.name, [[Der Geisterbeschwörer muss tote Spieler wiederbeleben, um zu gewinnen. Wird ein Spieler wiederbelebt, wird er wie ein Zombie aussehen und sterben, sobald seine Munition leer ist.]])
 	end
-end
-
-if SERVER then
+else -- SERVER
 	-- Special Necromancer Radar, it only shows dead bodies
 	ROLE.CustomRadar = function(ply)
 		local targets = {}
 		local scan_ents = ents.FindByClass("prop_ragdoll")
+		local mathRound = math.Round
 
 		for _, t in ipairs(scan_ents) do
 			local pos = t:LocalToWorld(t:OBBCenter())
 
-			pos.x = math.Round(pos.x)
-			pos.y = math.Round(pos.y)
-			pos.z = math.Round(pos.z)
+			pos.x = mathRound(pos.x)
+			pos.y = mathRound(pos.y)
+			pos.z = mathRound(pos.z)
 
-			table.insert(targets, {subrole = -1, pos = pos})
+			targets[#targets + 1] = {
+				subrole = -1, 
+				pos = pos
+			}
 		end
 
 		return targets
 	end
-end
-
-if SERVER then
+	
 	-- modify roles table of rolesetup addon
 	hook.Add("TTTAModifyRolesTable", "ModifyRoleNecroToInno", function(rolesTable)
 		local necromancers = rolesTable[ROLE_NECROMANCER]
