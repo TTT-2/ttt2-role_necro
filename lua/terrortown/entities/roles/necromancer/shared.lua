@@ -39,7 +39,7 @@ if CLIENT then
 		LANG.AddToLanguage("English", TEAM_NECROMANCER, "TEAM Necromancers")
 		LANG.AddToLanguage("English", "hilite_win_" .. TEAM_NECROMANCER, "THE NECRO WON")
 		LANG.AddToLanguage("English", "win_" .. TEAM_NECROMANCER, "The Necromancer has won!") -- teamname
-		LANG.AddToLanguage("English", "necroo_popup_" .. NECROMANCER.name, [[Now it's your turn! Try to get some dead players to fight on your side!]])
+		LANG.AddToLanguage("English", "info_popup_" .. NECROMANCER.name, [[Now it's your turn! Try to get some dead players to fight on your side!]])
 		LANG.AddToLanguage("English", "body_found_" .. NECROMANCER.abbr, "They were a Necromancer!")
 		LANG.AddToLanguage("English", "search_role_" .. NECROMANCER.abbr, "This person was a Necromancer!")
 		LANG.AddToLanguage("English", "ev_win_" .. TEAM_NECROMANCER, "The evil Necromancer won the round!")
@@ -50,7 +50,7 @@ if CLIENT then
 		LANG.AddToLanguage("Deutsch", TEAM_NECROMANCER, "TEAM Geisterbeschwörer")
 		LANG.AddToLanguage("Deutsch", "hilite_win_" .. TEAM_NECROMANCER, "THE NECRO WON")
 		LANG.AddToLanguage("Deutsch", "win_" .. TEAM_NECROMANCER, "Der Geisterbeschwörer hat gewonnen!")
-		LANG.AddToLanguage("Deutsch", "necroo_popup_" .. NECROMANCER.name, [[Jetzt bist du dran! Versuche, einige tote Spieler auf deine Seite zu ziehen!]])
+		LANG.AddToLanguage("Deutsch", "info_popup_" .. NECROMANCER.name, [[Jetzt bist du dran! Versuche, einige tote Spieler auf deine Seite zu ziehen!]])
 		LANG.AddToLanguage("Deutsch", "body_found_" .. NECROMANCER.abbr, "Er war ein Geisterbeschwörer...")
 		LANG.AddToLanguage("Deutsch", "search_role_" .. NECROMANCER.abbr, "Diese Person war ein Geisterbeschwörer!")
 		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_NECROMANCER, "Der böse Geisterbeschwörer hat die Runde gewonnen!")
@@ -72,14 +72,14 @@ else -- SERVER
 			pos.z = mathRound(pos.z)
 
 			targets[#targets + 1] = {
-				subrole = -1, 
+				subrole = -1,
 				pos = pos
 			}
 		end
 
 		return targets
 	end
-	
+
 	-- modify roles table of rolesetup addon
 	hook.Add("TTTAModifyRolesTable", "ModifyRoleNecroToInno", function(rolesTable)
 		local necromancers = rolesTable[ROLE_NECROMANCER]
@@ -105,7 +105,7 @@ else -- SERVER
 	-- make sure that jackal and necro can not spawn together
 	hook.Add("TTT2ModifySelectableRoles", "TTTHJackOrNecro", function(selectableRoles)
 		if not selectableRoles[NECROMANCER] or not selectableRoles[JACKAL] then return end
-		
+
 		if math.random(2) == 2 then
 			selectableRoles[NECROMANCER] = nil
 		else
