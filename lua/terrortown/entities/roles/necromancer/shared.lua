@@ -9,8 +9,6 @@ roles.InitCustomTeam(ROLE.name, {
 
 function ROLE:PreInitialize()
 	self.color = Color(131, 55, 85, 255)
-	self.dkcolor = Color(73, 8, 33, 255)
-	self.bgcolor = Color(100, 137, 58, 255)
 
 	self.abbr = "necro"
 	self.defaultEquipment = SPECIAL_EQUIPMENT

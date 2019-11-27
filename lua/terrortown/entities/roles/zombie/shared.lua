@@ -6,8 +6,6 @@ local maxhealth = CreateConVar("ttt2_zomb_maxhealth_new_zomb", 100, {FCVAR_ARCHI
 
 function ROLE:PreInitialize()
 	self.color = Color(68, 28, 44, 255)
-	self.dkcolor = Color(32, 3, 15, 255)
-	self.bgcolor = Color(53, 72, 30, 255)
 
 	self.abbr = "zomb"
 	self.surviveBonus = 1
