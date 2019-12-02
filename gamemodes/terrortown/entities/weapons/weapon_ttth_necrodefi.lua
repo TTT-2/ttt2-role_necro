@@ -208,7 +208,7 @@ if SERVER then
 					newPos = v - Vector(0, 0, midsize.z * 0.5)
 				end
 			end
-		until(not util.IsInWorld(newPos) or IsStucking(owner, newPos))
+		until (not util.IsInWorld(newPos) or IsStucking(owner, newPos))
 
 		return newPos or false
 	end

@@ -84,7 +84,7 @@ if SERVER then -- SERVER
 
 		timer.Create(name, math.random(minDelay, maxDelay) + startDelay, 1, function()
 			if not CanIdle(target) then return end
-			
+
 			target:EmitSound(zombie_sound_idles[math.random(zombie_sound_idles_len)], SNDLVL_90dB, 100, 1, CHAN_VOICE)
 
 			StartZombieIdle(target, name)
@@ -124,10 +124,10 @@ if SERVER then -- SERVER
 	end)
 
 	hook.Add("PlayerCanPickupWeapon", "ZombModifyPickupWeapon", function(ply, wep)
-		if not IsValid(wep) or not IsValid(ply) 
-		or ply:GetSubRole() ~= ROLE_ZOMBIE 
-		or ply:IsSpec() and ply.IsGhost and ply:IsGhost() then 
-			return 
+		if not IsValid(wep) or not IsValid(ply)
+		or ply:GetSubRole() ~= ROLE_ZOMBIE
+		or ply:IsSpec() and ply.IsGhost and ply:IsGhost() then
+			return
 		end
 
 		if WEPS.GetClass(wep) ~= "weapon_ttth_zombpistol" then
@@ -153,7 +153,7 @@ if SERVER then -- SERVER
 	-- default loadout is used if the player spawns
 	hook.Add("TTT2ModifyDefaultLoadout", "ModifyZombLoadout", function(loadout_weapons, subrole)
 		if subrole ~= ROLE_ZOMBIE then return end
-		
+
 		local tmp = {}
 
 		for k, v in ipairs(loadout_weapons[subrole]) do
@@ -182,17 +182,17 @@ if SERVER then -- SERVER
 	hook.Add("TTT2RolesLoaded", "AddZombPistolToDefaultLoadout", function()
 		local wep = weapons.GetStored("weapon_ttth_zombpistol")
 		if not wep then return end
-		
+
 		wep.InLoadoutFor = wep.InLoadoutFor or {}
 
 		if table.HasValue(wep.InLoadoutFor, ROLE_ZOMBIE) then return end
-		
+
 		table.insert(wep.InLoadoutFor, ROLE_ZOMBIE)
 	end)
 
 	hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
 		if not IsValid(ply) or ply:GetSubRole() ~= ROLE_ZOMBIE then return end
-		
+
 		noLag[1] = noLag[1] * 0.5
 	end)
 end
