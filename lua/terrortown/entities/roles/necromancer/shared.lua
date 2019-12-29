@@ -63,6 +63,8 @@ else -- SERVER
 		local mathRound = math.Round
 
 		for _, t in ipairs(scan_ents) do
+			if not t.player_ragdoll then continue end
+
 			local pos = t:LocalToWorld(t:OBBCenter())
 
 			pos.x = mathRound(pos.x)
