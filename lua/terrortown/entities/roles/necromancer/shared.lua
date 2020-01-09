@@ -90,7 +90,7 @@ else -- SERVER
 		rolesTable[ROLE_NECROMANCER] = 0
 	end)
 
-	-- Give Loadout on respawn and rolechange	
+	-- Give Loadout on respawn and rolechange
 	function ROLE:GiveRoleLoadout(ply, isRoleChange)
 		ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
 		ply:GiveEquipmentItem("item_ttt_radar")

@@ -46,7 +46,29 @@ hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
 	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_maxhealth_new_zomb", slider = true, min = 10, max = 500, desc = "Max Health for all new Zombies (Def. 100)"})
 end)
 
-if SERVER then -- SERVER
+if SERVER then
+	-- Give Loadout on respawn and rolechange
+	function ROLE:GiveRoleLoadout(ply, isRoleChange)
+		-- remove normal player loadout
+		ply:StripWeapon("weapon_zm_improvised")
+		ply:StripWeapon("weapon_zm_carry")
+		ply:StripWeapon("weapon_ttt_unarmed")
+
+		-- give zombie deagle
+		ply:GiveEquipmentWeapon("weapon_ttth_zombpistol")
+	end
+
+	-- Remove Loadout on death and rolechange
+	function ROLE:RemoveRoleLoadout(ply, isRoleChange)
+		-- give back normal player loadout
+		ply:GiveEquipmentWeapon("weapon_zm_improvised")
+		ply:GiveEquipmentWeapon("weapon_zm_carry")
+		ply:GiveEquipmentWeapon("weapon_ttt_unarmed")
+
+		-- remove zombie deagle
+		ply:StripWeapon("weapon_ttth_zombpistol")
+	end
+
 	zombie_sound_idles = {
 		"npc/zombie/zombie_voice_idle1.wav",
 		"npc/zombie/zombie_voice_idle2.wav",
@@ -148,46 +170,6 @@ if SERVER then -- SERVER
 		if IsValid(ply) and ply:IsActive() and ply:GetSubRole() == ROLE_ZOMBIE then
 			return true
 		end
-	end)
-
-	-- default loadout is used if the player spawns
-	hook.Add("TTT2ModifyDefaultLoadout", "ModifyZombLoadout", function(loadout_weapons, subrole)
-		if subrole ~= ROLE_ZOMBIE then return end
-
-		local tmp = {}
-
-		for k, v in ipairs(loadout_weapons[subrole]) do
-			if v == "weapon_zm_improvised" or v == "weapon_zm_carry" or v == "weapon_ttt_unarmed" then
-				table.insert(tmp, 1, k)
-
-				local tbl = weapons.GetStored(v)
-
-				if tbl and tbl.InLoadoutFor then
-					for k2, sr in ipairs(tbl.InLoadoutFor) do
-						if sr == subrole then
-							table.remove(tbl.InLoadoutFor, k2)
-
-							break
-						end
-					end
-				end
-			end
-		end
-
-		for _, key in ipairs(tmp) do
-			table.remove(loadout_weapons[subrole], key)
-		end
-	end)
-
-	hook.Add("TTT2RolesLoaded", "AddZombPistolToDefaultLoadout", function()
-		local wep = weapons.GetStored("weapon_ttth_zombpistol")
-		if not wep then return end
-
-		wep.InLoadoutFor = wep.InLoadoutFor or {}
-
-		if table.HasValue(wep.InLoadoutFor, ROLE_ZOMBIE) then return end
-
-		table.insert(wep.InLoadoutFor, ROLE_ZOMBIE)
 	end)
 
 	hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
