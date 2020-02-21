@@ -2,6 +2,26 @@ if SERVER then
 	AddCSLuaFile()
 end
 
+-- CREATE CONVARS
+local defi_ammo = CreateConVar("ttt2_defi_ammo", 0.34, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+
+-- SYNC CONVARS <> GLOBAL VARS
+if SERVER then
+	hook.Add("TTT2SyncGlobals", "TTT2NecroSyncGlobals", function()
+		SetGlobalFloat(defi_ammo:GetName(), defi_ammo:GetFloat())
+	end)
+
+	cvars.AddChangeCallback(defi_ammo:GetName(), function(name, old, new)
+		SetGlobalFloat(defi_ammo:GetName(), tonumber(new) == 1)
+	end, defi_ammo:GetName())
+end
+
+hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicNecroCVars", function(tbl)
+	tbl[ROLE_NECROMANCER] = tbl[ROLE_NECROMANCER] or {}
+
+	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_defi_ammo", slider = true, min = 0, max = 5, decimal = 2, desc = "Defi Ammo multiplier (Def. 0.34)"})
+end)
+
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_necro",
 	color = Color(131, 55, 85, 255)
@@ -30,32 +50,7 @@ function ROLE:PreInitialize()
 	}
 end
 
-if CLIENT then
-	function ROLE:Initialize()
-		-- Role specific language elements
-		LANG.AddToLanguage("English", NECROMANCER.name, "Necromancer")
-		LANG.AddToLanguage("English", TEAM_NECROMANCER, "TEAM Necromancers")
-		LANG.AddToLanguage("English", "hilite_win_" .. TEAM_NECROMANCER, "THE NECRO WON")
-		LANG.AddToLanguage("English", "win_" .. TEAM_NECROMANCER, "The Necromancer has won!") -- teamname
-		LANG.AddToLanguage("English", "info_popup_" .. NECROMANCER.name, [[Now it's your turn! Try to get some dead players to fight on your side!]])
-		LANG.AddToLanguage("English", "body_found_" .. NECROMANCER.abbr, "They were a Necromancer!")
-		LANG.AddToLanguage("English", "search_role_" .. NECROMANCER.abbr, "This person was a Necromancer!")
-		LANG.AddToLanguage("English", "ev_win_" .. TEAM_NECROMANCER, "The evil Necromancer won the round!")
-		LANG.AddToLanguage("English", "target_" .. NECROMANCER.name, "Necromancer")
-		LANG.AddToLanguage("English", "ttt2_desc_" .. NECROMANCER.name, [[The Necromancer needs to revive dead players. If a player gets revived, the player looks like a zombie and will die if the ammo is empty.]])
-
-		LANG.AddToLanguage("Deutsch", NECROMANCER.name, "Geisterbeschwörer")
-		LANG.AddToLanguage("Deutsch", TEAM_NECROMANCER, "TEAM Geisterbeschwörer")
-		LANG.AddToLanguage("Deutsch", "hilite_win_" .. TEAM_NECROMANCER, "THE NECRO WON")
-		LANG.AddToLanguage("Deutsch", "win_" .. TEAM_NECROMANCER, "Der Geisterbeschwörer hat gewonnen!")
-		LANG.AddToLanguage("Deutsch", "info_popup_" .. NECROMANCER.name, [[Jetzt bist du dran! Versuche, einige tote Spieler auf deine Seite zu ziehen!]])
-		LANG.AddToLanguage("Deutsch", "body_found_" .. NECROMANCER.abbr, "Er war ein Geisterbeschwörer...")
-		LANG.AddToLanguage("Deutsch", "search_role_" .. NECROMANCER.abbr, "Diese Person war ein Geisterbeschwörer!")
-		LANG.AddToLanguage("Deutsch", "ev_win_" .. TEAM_NECROMANCER, "Der böse Geisterbeschwörer hat die Runde gewonnen!")
-		LANG.AddToLanguage("Deutsch", "target_" .. NECROMANCER.name, "Geisterbeschwörer")
-		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. NECROMANCER.name, [[Der Geisterbeschwörer muss tote Spieler wiederbeleben, um zu gewinnen. Wird ein Spieler wiederbelebt, wird er wie ein Zombie aussehen und sterben, sobald seine Munition leer ist.]])
-	end
-else -- SERVER
+if SERVER then
 	-- Special Necromancer Radar, it only shows dead bodies
 	ROLE.CustomRadar = function(ply)
 		local targets = {}

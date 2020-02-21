@@ -14,7 +14,7 @@ SWEP.HoldType = "pistol"
 SWEP.LimitedStock = true
 
 if CLIENT then
-	SWEP.PrintName = "Necro's Defi"
+	SWEP.PrintName = "necro_defi_name"
 	SWEP.Slot = 7
 
 	SWEP.ViewModelFOV = 78
@@ -106,7 +106,7 @@ function SWEP:Initialize()
 		end
 	end
 
-	ammo = ammo + i * 0.34
+	ammo = ammo + i * GetGlobalFloat("ttt2_defi_ammo", 0.34)
 
 	if ammo > 1 then
 		ammo = ammo - 1

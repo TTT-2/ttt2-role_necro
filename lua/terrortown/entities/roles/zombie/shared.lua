@@ -2,7 +2,20 @@ if SERVER then
 	AddCSLuaFile()
 end
 
+-- CREATE CONVARS
 local maxhealth = CreateConVar("ttt2_zomb_maxhealth_new_zomb", 100, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local walkspeed = CreateConVar("ttt2_zomb_walkspeed", 0.5, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+
+-- SYNC CONVARS <> GLOBAL VARS
+if SERVER then
+	hook.Add("TTT2SyncGlobals", "TTT2ZombieSyncGlobals", function()
+		SetGlobalFloat(walkspeed:GetName(), walkspeed:GetFloat())
+	end)
+
+	cvars.AddChangeCallback(walkspeed:GetName(), function(name, old, new)
+		SetGlobalFloat(walkspeed:GetName(), tonumber(new) == 1)
+	end, walkspeed:GetName())
+end
 
 function ROLE:PreInitialize()
 	self.color = Color(68, 28, 44, 255)
@@ -22,28 +35,13 @@ end
 
 function ROLE:Initialize()
 	roles.SetBaseRole(self, ROLE_NECROMANCER)
-
-	if CLIENT then
-		-- Role specific language elements
-		LANG.AddToLanguage("English", ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("English", "target_" .. ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("English", "ttt2_desc_" .. ZOMBIE.name, [[You need to win with your mate!]])
-		LANG.AddToLanguage("English", "body_found_" .. ZOMBIE.abbr, "They were a Zombie!")
-		LANG.AddToLanguage("English", "search_role_" .. ZOMBIE.abbr, "This person was a Zombie!")
-
-		LANG.AddToLanguage("Deutsch", ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("Deutsch", "target_" .. ZOMBIE.name, "Zombie")
-		LANG.AddToLanguage("Deutsch", "ttt2_desc_" .. ZOMBIE.name, [[Du musst mit deinem Mate gewinnen!]])
-		LANG.AddToLanguage("Deutsch", "body_found_" .. ZOMBIE.abbr, "Er war ein Zombie...")
-		LANG.AddToLanguage("Deutsch", "search_role_" .. ZOMBIE.abbr, "Diese Person war ein Zombie!")
-	end
 end
-
 
 hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
 	tbl[ROLE_ZOMBIE] = tbl[ROLE_ZOMBIE] or {}
 
-	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_maxhealth_new_zomb", slider = true, min = 10, max = 500, desc = "Max Health for all new Zombies (Def. 100)"})
+	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_maxhealth_new_zomb", slider = true, min = 10, max = 500, desc = "Health for new zombies (Def. 100)"})
+	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_walkspeed", slider = true, min = 0, max = 5, decimal = 2, desc = "Zombie walkspeed multplier (Def. 0.5)"})
 end)
 
 if SERVER then
@@ -171,10 +169,11 @@ if SERVER then
 			return true
 		end
 	end)
-
-	hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
-		if not IsValid(ply) or ply:GetSubRole() ~= ROLE_ZOMBIE then return end
-
-		noLag[1] = noLag[1] * 0.5
-	end)
 end
+
+-- walk speed change has to be run on client and server
+hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
+	if not IsValid(ply) or ply:GetSubRole() ~= ROLE_ZOMBIE then return end
+
+	noLag[1] = noLag[1] * GetGlobalFloat(walkspeed:GetName(), 0.5)
+end)
