@@ -121,7 +121,8 @@ if SERVER then
 			StartZombieIdle(target, name)
 		end)
 
-		target:SetMaxHealth(maxhealth:GetInt()) -- just for new zombie
+		target:SetMaxHealth(maxhealth:GetInt())
+		target:SetHealth(maxhealth:GetInt())
 
 		SendFullStateUpdate()
 	end

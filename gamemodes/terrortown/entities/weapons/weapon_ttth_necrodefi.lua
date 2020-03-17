@@ -244,8 +244,6 @@ if SERVER then
 
 		local credits = CORPSE.GetCredits(body, 0) or 0
 
-		AddZombie(ply)
-
 		if ply:GetSubRole() == ROLE_ZOMBIE and CORPSE.GetFound(body, false) then
 			local plys = {}
 
@@ -269,7 +267,8 @@ if SERVER then
 		ply:SetCredits(credits)
 		ply:SetPos(self.Location or body:GetPos())
 		ply:SetEyeAngles(Angle(0, body:GetAngles().y, 0))
-		ply:SetHealth(spawnhealth:GetInt())
+
+		AddZombie(ply)
 
 		body:Remove()
 
