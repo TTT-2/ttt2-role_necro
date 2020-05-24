@@ -75,6 +75,8 @@ if SERVER then
 		return targets
 	end
 
+	ROLE.radarTime = 15
+
 	-- modify roles table of rolesetup addon
 	hook.Add("TTTAModifyRolesTable", "ModifyRoleNecroToInno", function(rolesTable)
 		local necromancers = rolesTable[ROLE_NECROMANCER]
