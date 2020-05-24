@@ -3,7 +3,9 @@ if SERVER then
 end
 
 -- CREATE CONVARS
-local defi_ammo = CreateConVar("ttt2_defi_ammo", 0.34, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local defi_ammo = CreateConVar("ttt2_necrodefi_ammo", 0.34, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+CreateConVar("ttt2_necrodefi_revive_time", 3.0, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+CreateConVar("ttt2_necrodefi_error_time", 1.5, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
 
 -- SYNC CONVARS <> GLOBAL VARS
 if SERVER then
@@ -19,7 +21,9 @@ end
 hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicNecroCVars", function(tbl)
 	tbl[ROLE_NECROMANCER] = tbl[ROLE_NECROMANCER] or {}
 
-	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_defi_ammo", slider = true, min = 0, max = 5, decimal = 2, desc = "Defi Ammo multiplier (Def. 0.34)"})
+	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_ammo", slider = true, min = 0, max = 5, decimal = 2, desc = "Defi ammo multiplier (Def. 0.34)"})
+	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_revive_time", slider = true, min = 0, max = 30, decimal = 1, desc = "Defi revival time (Def. 3.0)"})
+	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_error_time", slider = true, min = 0, max = 30, decimal = 1, desc = "Defi recharging time (Def. 1.5)"})
 end)
 
 roles.InitCustomTeam(ROLE.name, {

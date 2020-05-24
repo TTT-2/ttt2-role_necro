@@ -112,7 +112,6 @@ if SERVER then
 	end
 
 	function AddZombie(target)
-		target:StripWeapons()
 		target:SetRole(ROLE_ZOMBIE)
 
 		local name = "sound_idle_" .. target:EntIndex()

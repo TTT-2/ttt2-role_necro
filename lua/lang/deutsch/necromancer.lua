@@ -20,3 +20,15 @@ L["search_role_" .. ZOMBIE.abbr] = "Diese Person war ein Zombie!"
 
 -- OTHER ROLE LANGUAGE STRINGS
 L["necro_defi_name"] = "Geisterbeschwörer Defi"
+
+L["revived_by_necromancer"] = "You are revived by {name} as a necromancer zombie. Prepare yourself!"
+L["necrodefi_hold_key_to_revive"] = "Du wirst von {name} als ein Geisterbeschwörer Zombie wiederbelebt. Halte dich bereit!"
+L["necrodefi_revive_progress"] = "Zeit übrig: {time}s"
+L["necrodefi_charging"] = "Defibrillator lädt sich auf, bitte warten"
+L["necrodefi_player_already_reviving"] = "Dieser Spieler wird bereits wiederbelebt"
+L["necrodefi_error_no_space"] = "Es ist nicht genügend Platz vorhanden um den Spieler wiederzubeleben."
+L["necrodefi_error_too_fast"] = "Defibrillator lädt sich auf. Bitte warten."
+L["necrodefi_error_lost_target"] = "Du hast dein Ziel verloren. Bitte versuche es erneut."
+L["necrodefi_error_no_valid_ply"] = "Du kannst diesen Spieler nicht wiederbeleben, da er nicht länger valide ist."
+L["necrodefi_error_already_reviving"] = "Du kannst diesen Spieler nicht wiederbeleben, da er bereits wiederbelebt wird."
+L["necrodefi_error_failed"] = "Wiederbeleben fehlgeschlagen. Bitte versuche es erneut."
