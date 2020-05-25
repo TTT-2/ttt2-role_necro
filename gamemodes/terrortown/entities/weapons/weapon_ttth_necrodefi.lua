@@ -66,6 +66,12 @@ if SERVER then
 	util.AddNetworkString("RequestNecroRevivalStatus")
 	util.AddNetworkString("ReceiveNecroRevivalStatus")
 
+	function SWEP:OnDrop()
+		self.BaseClass.OnDrop(self)
+
+		self:Remove()
+	end
+
 	function SWEP:SetState(state)
 		self:SetNWInt("defi_state", state or DEFI_IDLE)
 	end
