@@ -3,7 +3,7 @@ L = LANG.GetLanguageTableReference("deutsch")
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Geisterbeschwörer"
 L[NECROMANCER.defaultTeam] = "TEAM Geisterbeschwörer"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "THE NECRO WON"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "DER GEISTERBESCHWÖRER GEWINNT"
 L["win_" .. NECROMANCER.defaultTeam] = "Der Geisterbeschwörer hat gewonnen!"
 L["info_popup_" .. NECROMANCER.name] = [[Jetzt bist du dran! Versuche, einige tote Spieler auf deine Seite zu ziehen!]]
 L["body_found_" .. NECROMANCER.abbr] = "Er war ein Geisterbeschwörer..."
