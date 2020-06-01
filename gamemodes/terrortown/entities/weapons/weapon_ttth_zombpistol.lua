@@ -3,11 +3,14 @@ AddCSLuaFile()
 SWEP.HoldType = "pistol"
 
 if CLIENT then
-	SWEP.PrintName = "Zombie Deagle"
-	SWEP.Slot = 1
-
 	SWEP.ViewModelFlip = false
 	SWEP.ViewModelFOV = 54
+
+	SWEP.EquipMenuData = {
+		type = "item_weapon",
+		name = "zombie_pistol_name",
+		desc = "zombie_pistol_desc"
+	}
 
 	SWEP.Icon = "vgui/ttt/icon_deagle"
 end

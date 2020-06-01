@@ -20,6 +20,7 @@ L["search_role_" .. ZOMBIE.abbr] = "Diese Person war ein Zombie!"
 
 -- OTHER ROLE LANGUAGE STRINGS
 L["necro_defi_name"] = "Geisterbeschwörer Defi"
+L["zombie_pistol_name"] = "Zombie Deagle"
 
 L["revived_by_necromancer"] = "Du wirst von {name} als ein Geisterbeschwörer Zombie wiederbelebt. Halte dich bereit!"
 L["necrodefi_hold_key_to_revive"] = "Halte [{key}] um Spieler als Zombie wiederzubeleben"

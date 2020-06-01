@@ -1,7 +1,7 @@
 if SERVER then
 	AddCSLuaFile()
 
-	resource.AddFile("materials/gui/ttt/icon_necrodefibrillator.vmt")
+	resource.AddFile("materials/gui/ttt/icon_defi_necro.vmt")
 end
 
 local DEFI_IDLE = 0
@@ -28,7 +28,7 @@ if CLIENT then
 		desc = "necro_defi_desc"
 	}
 
-	SWEP.Icon = "vgui/ttt/icon_necrodefibrillator"
+	SWEP.Icon = "vgui/ttt/icon_defi_necro"
 end
 
 SWEP.Kind = WEAPON_EQUIP2
