@@ -33,3 +33,4 @@ L["necrodefi_error_lost_target"] = "Du hast dein Ziel verloren. Bitte versuche e
 L["necrodefi_error_no_valid_ply"] = "Du kannst diesen Spieler nicht wiederbeleben, da er nicht länger valide ist."
 L["necrodefi_error_already_reviving"] = "Du kannst diesen Spieler nicht wiederbeleben, da er bereits wiederbelebt wird."
 L["necrodefi_error_failed"] = "Wiederbeleben fehlgeschlagen. Bitte versuche es erneut."
+L["necrodefi_error_zombie"] = "Du kannst kein Zombie wiederbeleben."

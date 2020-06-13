@@ -14,6 +14,7 @@ local DEFI_ERROR_LOST_TARGET = 3
 local DEFI_ERROR_NO_VALID_PLY = 4
 local DEFI_ERROR_ALREADY_REVIVING = 5
 local DEFI_ERROR_FAILED = 6
+local DEFI_ERROR_ZOMBIE = 7
 
 SWEP.Base = "weapon_tttbase"
 
@@ -118,6 +119,8 @@ if SERVER then
 			LANG.Msg(owner, "necrodefi_error_already_reviving", nil, MSG_MSTACK_WARN)
 		elseif type == DEFI_ERROR_FAILED then
 			LANG.Msg(owner, "necrodefi_error_failed", nil, MSG_MSTACK_WARN)
+		elseif type == DEFI_ERROR_ZOMBIE then
+			LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
 		end
 	end
 
@@ -243,6 +246,12 @@ if SERVER then
 			return
 		end
 
+		if CORPSE.GetPlayer(ent):GetSubRole() == ROLE_ZOMBIE then
+			self:Error(DEFI_ERROR_ZOMBIE)
+
+			return
+		end
+
 		if not spawnPoint then
 			self:Error(DEFI_ERROR_NO_SPACE)
 		else
@@ -351,7 +360,7 @@ if CLIENT then
 
 		if activeWeapon:GetState() ~= DEFI_BUSY then return end
 
-		local progress = (CurTime() - activeWeapon:GetStartTime()) / activeWeapon:GetReviveTime()
+		local progress = math.min((CurTime() - activeWeapon:GetStartTime()) / activeWeapon:GetReviveTime(), 1.0)
 		local timeLeft = activeWeapon:GetReviveTime() - (CurTime() - activeWeapon:GetStartTime())
 
 		local x = 0.5 * ScrW()
