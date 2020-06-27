@@ -113,4 +113,15 @@ if SERVER then
 			selectableRoles[JACKAL] = nil
 		end
 	end)
+	
+	-- make sure that jester and necro can not spawn together
+	hook.Add("TTT2ModifySelectableRoles", "TTTHJestOrNecro", function(selectableRoles)
+		if not selectableRoles[NECROMANCER] or not selectableRoles[JESTER] then return end
+
+		if math.random(2) == 2 then
+			selectableRoles[NECROMANCER] = nil
+		else
+			selectableRoles[JESTER] = nil
+		end
+	end)
 end
