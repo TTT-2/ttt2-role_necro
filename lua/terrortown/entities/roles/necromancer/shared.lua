@@ -55,6 +55,12 @@ function ROLE:PreInitialize()
 end
 
 if SERVER then
+	function ROLE:Initialize()
+		if JESTER then
+			self.networkRoles = {JESTER}
+		end
+	end
+
 	-- Special Necromancer Radar, it only shows dead bodies
 	ROLE.CustomRadar = function(ply)
 		local targets = {}
