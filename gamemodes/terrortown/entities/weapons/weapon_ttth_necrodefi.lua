@@ -70,6 +70,7 @@ if SERVER then
 	function SWEP:OnDrop()
 		self.BaseClass.OnDrop(self)
 
+		self:CancelRevival()
 		self:Remove()
 	end
 
@@ -304,7 +305,7 @@ if CLIENT then
 			ply.defi_lastRequest = CurTime()
 		end
 
-		return ply.defi_isRevining or false
+		return ply.defi_isReviving or false
 	end
 
 	net.Receive("ReceiveNecroRevivalStatus", function()
@@ -312,7 +313,7 @@ if CLIENT then
 
 		if not IsValid(ply) then return end
 
-		ply.defi_isRevining = net.ReadBool()
+		ply.defi_isReviving = net.ReadBool()
 	end)
 
 	hook.Add("TTTRenderEntityInfo", "ttt2_necro_defibrillator_display_info", function(tData)
