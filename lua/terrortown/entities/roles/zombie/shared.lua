@@ -35,9 +35,6 @@ end
 
 function ROLE:Initialize()
 	roles.SetBaseRole(self, ROLE_NECROMANCER)
-	if JESTER then
-		self.networkRoles = {JESTER}
-	end
 end
 
 hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
