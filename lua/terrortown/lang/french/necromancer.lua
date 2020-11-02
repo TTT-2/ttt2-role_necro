@@ -8,7 +8,7 @@ L["win_" .. NECROMANCER.defaultTeam] = "Le Nécromancien a gagné!"
 L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour ! Essayez de faire combattre des joueurs morts à vos côtés!]]
 L["body_found_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
 L["search_role_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
-L["ev_win_" .. NECROMANCER.defaultTeam] = "Le méchant Nécromancien a gagné la manche!"
+L["ev_win_" .. NECROMANCER.defaultTeam] = "Le méchant Nécromancien a gagné le round!"
 L["target_" .. NECROMANCER.name] = "Nécromancien"
 L["ttt2_desc_" .. NECROMANCER.name] = [[Le Nécromancien doit faire revivre les joueurs morts. Si un joueur est réanimé, il ressemble à un zombie et mourra si ses munitions sont vides.]]
 
