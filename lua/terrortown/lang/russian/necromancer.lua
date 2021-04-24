@@ -34,3 +34,8 @@ L["necrodefi_error_no_valid_ply"] = "Вы не можете оживить эт�
 L["necrodefi_error_already_reviving"] = "Вы не можете оживить этого игрока, так как он уже оживает."
 L["necrodefi_error_failed"] = "Попытка возрождения не удалась. Пожалуйста, попробуйте ещё раз."
 L["necrodefi_error_zombie"] = "Вы не можете оживить зомби."
+
+--L["tooltip_necro_revive_score"] = "Necro revival: {score}"
+--L["necro_revive_score"] = "Necro Revival:"
+--L["title_event_necro_revive"] = "A player became a zombie"
+--L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."

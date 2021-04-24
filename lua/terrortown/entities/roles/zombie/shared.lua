@@ -113,7 +113,9 @@ if SERVER then
 		end)
 	end
 
-	function AddZombie(target)
+	function AddZombie(target, necro)
+		events.Trigger(EVENT_NECRO_REVIVE, necro, target)
+
 		target:SetRole(ROLE_ZOMBIE)
 
 		local name = "sound_idle_" .. target:EntIndex()
@@ -125,6 +127,8 @@ if SERVER then
 		target:SetMaxHealth(maxhealth:GetInt())
 		target:SetHealth(maxhealth:GetInt())
 		target:ResetConfirmPlayer()
+
+		target.zombieMaster = necro
 
 		SendFullStateUpdate()
 	end
