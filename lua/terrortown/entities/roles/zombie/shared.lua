@@ -21,9 +21,11 @@ function ROLE:PreInitialize()
 	self.color = Color(68, 28, 44, 255)
 
 	self.abbr = "zomb"
-	self.surviveBonus = 1
-	self.scoreKillsMultiplier = 5
-	self.scoreTeamKillsMultiplier = -16
+	self.score.surviveBonusMultiplier = 0.2
+	self.score.timelimitMultiplier = -0.5
+	self.score.killsMultiplier = 2
+	self.score.teamKillsMultiplier = -4
+	self.score.bodyFoundMuliplier = 0
 	self.notSelectable = true
 	self.preventFindCredits = true
 	self.preventKillCredits = true

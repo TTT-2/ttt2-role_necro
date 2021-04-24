@@ -36,20 +36,22 @@ function ROLE:PreInitialize()
 
 	self.abbr = "necro"
 	self.defaultEquipment = SPECIAL_EQUIPMENT
-	self.surviveBonus = 0.2
-	self.scoreKillsMultiplier = 2
-	self.scoreTeamKillsMultiplier = -4
+	self.score.surviveBonusMultiplier = 0.2
+	self.score.timelimitMultiplier = -0.5
+	self.score.killsMultiplier = 2
+	self.score.teamKillsMultiplier = -4
+	self.score.bodyFoundMuliplier = 0
 
 	self.defaultTeam = TEAM_NECROMANCER
 	self.defaultEquipment = SPECIAL_EQUIPMENT
 
 	self.conVarData = {
-		pct = 0.15, -- necessary: percentage of getting this role selected (per player)
-		maximum = 1, -- maximum amount of roles in a round
-		minPlayers = 7, -- minimum amount of players until this role is able to get selected
-		random = 40, -- randomness of getting this role selected in a round
-		credits = 2, -- the starting credits of a specific role
-		togglable = true, -- option to toggle a role for a client if possible (F1 menu)
+		pct = 0.15,
+		maximum = 1,
+		minPlayers = 7,
+		random = 40,
+		credits = 2,
+		togglable = true,
 		shopFallback = SHOP_FALLBACK_TRAITOR
 	}
 end
