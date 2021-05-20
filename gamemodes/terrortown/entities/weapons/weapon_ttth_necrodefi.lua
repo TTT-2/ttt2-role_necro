@@ -15,6 +15,7 @@ local DEFI_ERROR_NO_VALID_PLY = 4
 local DEFI_ERROR_ALREADY_REVIVING = 5
 local DEFI_ERROR_FAILED = 6
 local DEFI_ERROR_ZOMBIE = 7
+local DEFI_ERROR_PLAYER_ALIVE = 8
 
 SWEP.Base = "weapon_tttbase"
 
@@ -122,6 +123,8 @@ if SERVER then
 			LANG.Msg(owner, "necrodefi_error_failed", nil, MSG_MSTACK_WARN)
 		elseif type == DEFI_ERROR_ZOMBIE then
 			LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
+		elseif type == DEFI_ERROR_PLAYER_ALIVE then
+			LANG.Msg(owner, "necrodefi_error_player_alive", nil, MSG_MSTACK_WARN)
 		end
 	end
 
@@ -141,6 +144,12 @@ if SERVER then
 			return
 		end
 
+		if ply:Alive() and not (SpecDM and not ply:IsGhost()) then
+			self:Error(DEFI_ERROR_PLAYER_ALIVE)
+
+			return
+		end
+
 		local reviveTime = GetConVar("ttt2_necrodefi_revive_time"):GetFloat()
 
 		self:SetState(DEFI_BUSY)
@@ -153,7 +162,9 @@ if SERVER then
 			function(p)
 				AddZombie(p, owner)
 			end,
-			nil,
+			function(p)
+				return not p:Alive() or (SpecDM and p:IsGhost())
+			end,
 			true,
 			true
 		)
@@ -198,12 +209,16 @@ if SERVER then
 		if self:GetState() ~= DEFI_BUSY then return end
 
 		local owner = self:GetOwner()
+		local target = CORPSE.GetPlayer(self.defiTarget)
 
 		if CurTime() >= self:GetStartTime() + GetConVar("ttt2_necrodefi_revive_time"):GetFloat() - 0.01 then
 			self:FinishRevival()
 		elseif not owner:KeyDown(IN_ATTACK) or owner:GetEyeTrace(MASK_SHOT_HULL).Entity ~= self.defiTarget then
 			self:CancelRevival()
 			self:Error(DEFI_ERROR_LOST_TARGET)
+		elseif target:Alive() and not (SpecDM and not target:IsGhost()) then
+			self:CancelRevival()
+			self:Error(DEFI_ERROR_PLAYER_ALIVE)
 		end
 	end
 
