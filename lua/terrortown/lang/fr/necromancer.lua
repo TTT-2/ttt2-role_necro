@@ -34,7 +34,7 @@ L["necrodefi_error_no_valid_ply"] = "Vous ne pouvez pas réanimer ce joueur car 
 L["necrodefi_error_already_reviving"] = "Vous ne pouvez pas réanimer ce joueur parce qu'il est déjà réanimé."
 L["necrodefi_error_failed"] = "La tentative de réanimation a échoué. Veuillez réessayer."
 L["necrodefi_error_zombie"] = "Vous ne pouvez pas faire revivre un zombie."
--- L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+--L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
 
 --L["tooltip_necro_revive_score"] = "Necro revival: {score}"
 --L["necro_revive_score"] = "Necro Revival:"
