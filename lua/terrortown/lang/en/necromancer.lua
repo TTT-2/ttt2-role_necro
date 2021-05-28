@@ -1,9 +1,9 @@
-L = LANG.GetLanguageTableReference("english")
+L = LANG.GetLanguageTableReference("en")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Necromancer"
-L[NECROMANCER.defaultTeam] = "Team Necromancers"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "THE NECROMANCER WON"
+L[NECROMANCER.defaultTeam] = "Team Necromancer"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "TEAM NECROMANCER WON"
 L["win_" .. NECROMANCER.defaultTeam] = "The Necromancer has won!"
 L["info_popup_" .. NECROMANCER.name] = [[Now it's your turn! Try to get some dead players to fight on your side!]]
 L["body_found_" .. NECROMANCER.abbr] = "They were a Necromancer!"
@@ -34,3 +34,8 @@ L["necrodefi_error_no_valid_ply"] = "You can't revive this player since they are
 L["necrodefi_error_already_reviving"] = "You can't revive this player since they are already reviving."
 L["necrodefi_error_failed"] = "Revival attempt failed. Please try again."
 L["necrodefi_error_zombie"] = "You can't revive a zombie."
+
+L["tooltip_necro_revive_score"] = "Necro revival: {score}"
+L["necro_revive_score"] = "Necro Revival:"
+L["title_event_necro_revive"] = "A player became a zombie"
+L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."

@@ -1,4 +1,4 @@
-local L = LANG.GetLanguageTableReference("italiano")
+local L = LANG.GetLanguageTableReference("it")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Negromante"
@@ -34,3 +34,8 @@ L["necrodefi_error_no_valid_ply"] = "Non puoi rianimare questo giocatore perchè
 L["necrodefi_error_already_reviving"] = "Non puoi rianimare questo giocatore perchè è gia stato rianimato."
 L["necrodefi_error_failed"] = "Tentativo di rianimazione fallito. Riprova."
 L["necrodefi_error_zombie"] = "Non puoi rianimare uno Zombie."
+
+--L["tooltip_necro_revive_score"] = "Necro revival: {score}"
+--L["necro_revive_score"] = "Necro Revival:"
+--L["title_event_necro_revive"] = "A player became a zombie"
+--L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."

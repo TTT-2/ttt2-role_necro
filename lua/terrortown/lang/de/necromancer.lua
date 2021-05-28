@@ -1,9 +1,9 @@
-L = LANG.GetLanguageTableReference("deutsch")
+L = LANG.GetLanguageTableReference("de")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Geisterbeschwörer"
 L[NECROMANCER.defaultTeam] = "Team Geisterbeschwörer"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "DIE GEISTERBESCHWÖRER GEWINNEN"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "TEAM GEISTERBESCHWÖRER GEWANN"
 L["win_" .. NECROMANCER.defaultTeam] = "Der Geisterbeschwörer hat gewonnen!"
 L["info_popup_" .. NECROMANCER.name] = [[Jetzt bist du dran! Versuche, einige tote Spieler auf deine Seite zu ziehen!]]
 L["body_found_" .. NECROMANCER.abbr] = "Er war ein Geisterbeschwörer..."
@@ -34,3 +34,8 @@ L["necrodefi_error_no_valid_ply"] = "Du kannst diesen Spieler nicht wiederbelebe
 L["necrodefi_error_already_reviving"] = "Du kannst diesen Spieler nicht wiederbeleben, da er bereits wiederbelebt wird."
 L["necrodefi_error_failed"] = "Wiederbeleben fehlgeschlagen. Bitte versuche es erneut."
 L["necrodefi_error_zombie"] = "Du kannst kein Zombie wiederbeleben."
+
+L["tooltip_necro_revive_score"] = "Geisterbeschwörung: {score}"
+L["necro_revive_score"] = "Geisterbeschwörung:"
+L["title_event_necro_revive"] = "Ein Spieler wurde zu einem Zombie"
+L["desc_event_necro_revive"] = "{necro} hat {zombie} ({zrole} / {zteam}) wiederbelebt und ihn dabei zu einem Zombie gemacht."
