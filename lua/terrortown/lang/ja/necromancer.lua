@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("japanese")
+L = LANG.GetLanguageTableReference("ja")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Necromancer"
