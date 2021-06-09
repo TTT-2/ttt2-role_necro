@@ -2,7 +2,7 @@ local L = LANG.GetLanguageTableReference("fr")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Nécromancien"
-L[NECROMANCER.defaultTeam] = "Team Nécromanciens"
+L[NECROMANCER.defaultTeam] = "Team des Nécromanciens"
 L["hilite_win_" .. NECROMANCER.defaultTeam] = "LE NÉCROMANCIEN A GAGNÉ"
 L["win_" .. NECROMANCER.defaultTeam] = "Le Nécromancien a gagné!"
 L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour! Essayez de faire combattre des joueurs morts à vos côtés!]]
@@ -36,7 +36,7 @@ L["necrodefi_error_failed"] = "La tentative de réanimation a échoué. Veuillez
 L["necrodefi_error_zombie"] = "Vous ne pouvez pas faire revivre un zombie."
 L["necrodefi_error_player_alive"] = "Vous ne pouvez pas réanimer ce joueur parce qu'il est déjà réanimé."
 
-L["tooltip_necro_revive_score"] = "Réanimation du Nécromancien: {score}"
-L["necro_revive_score"] = "Réanimation du Nécromancien:"
+L["tooltip_necro_revive_score"] = "Réanimation du Nécro: {score}"
+L["necro_revive_score"] = "Réanimation du Nécro:"
 L["title_event_necro_revive"] = "Un joueur est devenue un zombie"
-L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et les a transformés en zombie."
+L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et l'a transformé en zombie."
