@@ -18,6 +18,8 @@ end
 SWEP.Base = "weapon_tttbase"
 
 SWEP.Kind = WEAPON_PISTOL
+SWEP.CanBuy = nil
+SWEP.notBuyable = true
 SWEP.WeaponID = AMMO_DEAGLE
 
 SWEP.Primary.Ammo = "none"

@@ -35,6 +35,7 @@ end
 
 SWEP.Kind = WEAPON_EQUIP2
 SWEP.CanBuy = nil
+SWEP.notBuyable = true
 
 SWEP.UseHands = true
 SWEP.ViewModel = "models/weapons/v_c4.mdl"
