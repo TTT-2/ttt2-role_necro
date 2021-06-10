@@ -3,7 +3,7 @@ local L = LANG.GetLanguageTableReference("fr")
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Nécromancien"
 L[NECROMANCER.defaultTeam] = "Team des Nécromanciens"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "LA TEAM DU NÉCROMANCIEN A GAGNÉ"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "LA TEAM NÉCROMANCIENS A GAGNÉ"
 L["win_" .. NECROMANCER.defaultTeam] = "Le Nécromancien a gagné!"
 L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour! Essayez de faire combattre des joueurs morts à vos côtés!]]
 L["body_found_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
