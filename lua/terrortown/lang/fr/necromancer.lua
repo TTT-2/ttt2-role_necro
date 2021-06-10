@@ -2,10 +2,10 @@ local L = LANG.GetLanguageTableReference("fr")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Nécromancien"
-L[NECROMANCER.defaultTeam] = "Team Nécromanciens"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "LE NÉCROMANCIEN A GAGNÉ"
+L[NECROMANCER.defaultTeam] = "Team des Nécromanciens"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "LA TEAM NÉCROMANCIENS A GAGNÉ"
 L["win_" .. NECROMANCER.defaultTeam] = "Le Nécromancien a gagné!"
-L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour ! Essayez de faire combattre des joueurs morts à vos côtés!]]
+L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour! Essayez de faire combattre des joueurs morts à vos côtés!]]
 L["body_found_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
 L["search_role_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
 L["ev_win_" .. NECROMANCER.defaultTeam] = "Le méchant Nécromancien a gagné le round!"
@@ -14,7 +14,7 @@ L["ttt2_desc_" .. NECROMANCER.name] = [[Le Nécromancien doit faire revivre les 
 
 L[ZOMBIE.name] = "Zombie"
 L["target_" .. ZOMBIE.name] = "Zombie"
-L["ttt2_desc_" .. ZOMBIE.name] = [[Vous devez gagner avec votre compagnon!]]
+L["ttt2_desc_" .. ZOMBIE.name] = [[Vous devez gagner avec vos compagnon!]]
 L["body_found_" .. ZOMBIE.abbr] = "C'était un Zombie!"
 L["search_role_" .. ZOMBIE.abbr] = "C'était un Zombie!"
 
@@ -34,9 +34,9 @@ L["necrodefi_error_no_valid_ply"] = "Vous ne pouvez pas réanimer ce joueur car 
 L["necrodefi_error_already_reviving"] = "Vous ne pouvez pas réanimer ce joueur parce qu'il est déjà réanimé."
 L["necrodefi_error_failed"] = "La tentative de réanimation a échoué. Veuillez réessayer."
 L["necrodefi_error_zombie"] = "Vous ne pouvez pas faire revivre un zombie."
---L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+L["necrodefi_error_player_alive"] = "Vous ne pouvez pas réanimer ce joueur parce qu'il est déjà réanimé."
 
---L["tooltip_necro_revive_score"] = "Necro revival: {score}"
---L["necro_revive_score"] = "Necro Revival:"
---L["title_event_necro_revive"] = "A player became a zombie"
---L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
+L["tooltip_necro_revive_score"] = "Réanimation du Nécro: {score}"
+L["necro_revive_score"] = "Réanimation du Nécro:"
+L["title_event_necro_revive"] = "Un joueur est devenue un zombie"
+L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et l'a transformé en zombie."
