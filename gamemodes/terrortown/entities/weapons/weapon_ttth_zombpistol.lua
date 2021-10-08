@@ -72,7 +72,7 @@ if SERVER then
 	function SWEP:OnDrop()
 		local owner = self:GetOwner()
 
-		if IsValid(owner) and owner:Alive() then
+		if IsValid(owner) and owner:IsActive() then
 			owner:TakeDamage(99999, game.GetWorld(), self)
 		end
 
