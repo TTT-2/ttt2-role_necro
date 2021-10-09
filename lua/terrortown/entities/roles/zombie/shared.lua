@@ -116,7 +116,7 @@ if SERVER then
 	function AddZombie(target, necro)
 		events.Trigger(EVENT_NECRO_REVIVE, necro, target)
 
-		target:SetRole(ROLE_ZOMBIE)
+		target:SetRole(ROLE_ZOMBIE, necro:GetTeam())
 
 		local name = "sound_idle_" .. target:EntIndex()
 
