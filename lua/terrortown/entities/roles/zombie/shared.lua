@@ -26,10 +26,9 @@ function ROLE:PreInitialize()
 	self.score.killsMultiplier = 2
 	self.score.teamKillsMultiplier = -4
 	self.score.bodyFoundMuliplier = 0
+
 	self.notSelectable = true
 	self.preventFindCredits = true
-	self.preventKillCredits = true
-	self.preventTraitorAloneCredits = true
 
 	self.defaultTeam = TEAM_NECROMANCER
 	self.defaultEquipment = SPECIAL_EQUIPMENT

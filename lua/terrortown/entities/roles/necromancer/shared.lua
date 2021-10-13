@@ -50,8 +50,10 @@ function ROLE:PreInitialize()
 		maximum = 1,
 		minPlayers = 7,
 		random = 40,
-		credits = 2,
 		togglable = true,
+		credits = 2,
+		creditsAwardDeadEnable = 1,
+		creditsAwardKillEnable = 1,
 		shopFallback = SHOP_FALLBACK_TRAITOR
 	}
 end
