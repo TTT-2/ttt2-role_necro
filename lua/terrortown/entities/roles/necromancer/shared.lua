@@ -45,6 +45,8 @@ function ROLE:PreInitialize()
 	self.defaultTeam = TEAM_NECROMANCER
 	self.defaultEquipment = SPECIAL_EQUIPMENT
 
+	self.isOmniscientRole = true
+
 	self.conVarData = {
 		pct = 0.15,
 		maximum = 1,

@@ -32,6 +32,8 @@ function ROLE:PreInitialize()
 
 	self.defaultTeam = TEAM_NECROMANCER
 	self.defaultEquipment = SPECIAL_EQUIPMENT
+
+	self.isOmniscientRole = true
 end
 
 function ROLE:Initialize()
