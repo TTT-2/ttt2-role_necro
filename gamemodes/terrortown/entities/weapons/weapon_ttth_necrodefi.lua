@@ -145,7 +145,7 @@ if SERVER then
 			return
 		end
 
-		if ply:IsActive() and not (SpecDM and not ply:IsGhost()) then
+		if ply:IsActive() then
 			self:Error(DEFI_ERROR_PLAYER_ALIVE)
 
 			return
@@ -164,7 +164,7 @@ if SERVER then
 				AddZombie(p, owner)
 			end,
 			function(p)
-				return not p:IsActive() or (SpecDM and p:IsGhost())
+				return not p:IsActive()
 			end,
 			true,
 			REVIVAL_BLOCK_ALL
@@ -217,7 +217,7 @@ if SERVER then
 		elseif not owner:KeyDown(IN_ATTACK) or owner:GetEyeTrace(MASK_SHOT_HULL).Entity ~= self.defiTarget then
 			self:CancelRevival()
 			self:Error(DEFI_ERROR_LOST_TARGET)
-		elseif target:IsActive() and not (SpecDM and not target:IsGhost()) then
+		elseif target:IsActive() then
 			self:CancelRevival()
 			self:Error(DEFI_ERROR_PLAYER_ALIVE)
 		end
