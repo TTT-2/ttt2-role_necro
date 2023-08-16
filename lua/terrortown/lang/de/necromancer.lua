@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("de")
+local L = LANG.GetLanguageTableReference("de")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Geisterbeschwörer"
@@ -35,6 +35,7 @@ L["necrodefi_error_already_reviving"] = "Du kannst diesen Spieler nicht wiederbe
 L["necrodefi_error_failed"] = "Wiederbeleben fehlgeschlagen. Bitte versuche es erneut."
 L["necrodefi_error_zombie"] = "Du kannst kein Zombie wiederbeleben."
 L["necrodefi_error_player_alive"] = "Du kannst diesen Spieler nicht wiederbeleben, da er bereits lebt."
+L["necrodefi_error_player_disconnected"] = "Du kannst diesen Spieler nicht wiederbeleben, da er das Spiel verlassen hat."
 
 L["tooltip_necro_revive_score"] = "Geisterbeschwörung: {score}"
 L["necro_revive_score"] = "Geisterbeschwörung:"

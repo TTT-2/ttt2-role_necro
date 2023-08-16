@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("ru")
+local L = LANG.GetLanguageTableReference("ru")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Некромант"
@@ -35,6 +35,7 @@ L["necrodefi_error_already_reviving"] = "Вы не можете оживить �
 L["necrodefi_error_failed"] = "Попытка возрождения не удалась. Пожалуйста, попробуйте ещё раз."
 L["necrodefi_error_zombie"] = "Вы не можете оживить зомби."
 --L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+--L["necrodefi_error_player_disconnected"] = "You can't revive this player since they have disconnected."
 
 --L["tooltip_necro_revive_score"] = "Necro revival: {score}"
 --L["necro_revive_score"] = "Necro Revival:"
