@@ -40,13 +40,6 @@ function ROLE:Initialize()
 	roles.SetBaseRole(self, ROLE_NECROMANCER)
 end
 
-hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicZombCVars", function(tbl)
-	tbl[ROLE_ZOMBIE] = tbl[ROLE_ZOMBIE] or {}
-
-	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_maxhealth_new_zomb", slider = true, min = 10, max = 500, desc = "Health for new zombies (Def. 100)"})
-	table.insert(tbl[ROLE_ZOMBIE], {cvar = "ttt2_zomb_walkspeed", slider = true, min = 0, max = 5, decimal = 2, desc = "Zombie walkspeed multplier (Def. 0.5)"})
-end)
-
 if SERVER then
 	-- Give Loadout on respawn and rolechange
 	function ROLE:GiveRoleLoadout(ply, isRoleChange)
@@ -185,3 +178,25 @@ hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
 
 	noLag[1] = noLag[1] * GetGlobalFloat(walkspeed:GetName(), 0.5)
 end)
+
+if CLIENT then
+	function ROLE:AddToSettingsMenu(parent)
+		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
+
+		form:MakeSlider({
+			serverConvar = "ttt2_zomb_maxhealth_new_zomb",
+			label = "label_zomb_maxhealth_new_zomb",
+			min = 10,
+			max = 500,
+			decimal = 0
+		})
+
+		form:MakeSlider({
+			serverConvar = "ttt2_zomb_walkspeed",
+			label = "label_zomb_walkspeed",
+			min = 0,
+			max = 5,
+			decimal = 2
+		})
+	end
+end
