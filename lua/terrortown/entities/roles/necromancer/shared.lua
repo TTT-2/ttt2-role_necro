@@ -18,14 +18,6 @@ if SERVER then
 	end, defi_ammo:GetName())
 end
 
-hook.Add("TTTUlxDynamicRCVars", "TTTUlxDynamicNecroCVars", function(tbl)
-	tbl[ROLE_NECROMANCER] = tbl[ROLE_NECROMANCER] or {}
-
-	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_ammo", slider = true, min = 0, max = 5, decimal = 2, desc = "Defi ammo multiplier (Def. 0.34)"})
-	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_revive_time", slider = true, min = 0, max = 30, decimal = 1, desc = "Defi revival time (Def. 3.0)"})
-	table.insert(tbl[ROLE_NECROMANCER], {cvar = "ttt2_necrodefi_error_time", slider = true, min = 0, max = 30, decimal = 1, desc = "Defi recharging time (Def. 1.5)"})
-end)
-
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_necro",
 	color = Color(131, 55, 85, 255)
@@ -119,4 +111,34 @@ if SERVER then
 			selectableRoles[JACKAL] = nil
 		end
 	end)
+end
+
+if CLIENT then
+	function ROLE:AddToSettingsMenu(parent)
+		local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
+
+		form:MakeSlider({
+			serverConvar = "ttt2_necrodefi_ammo",
+			label = "label_necrodefi_ammo",
+			min = 0,
+			max = 5,
+			decimal = 2
+		})
+
+		form:MakeSlider({
+			serverConvar = "ttt2_necrodefi_revive_time",
+			label = "label_necrodefi_revive_time",
+			min = 0,
+			max = 30,
+			decimal = 1
+		})
+
+		form:MakeSlider({
+			serverConvar = "ttt2_necrodefi_error_time",
+			label = "label_necrodefi_error_time",
+			min = 0,
+			max = 30,
+			decimal = 1
+		})
+	end
 end
