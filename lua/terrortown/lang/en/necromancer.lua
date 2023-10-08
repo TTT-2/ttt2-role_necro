@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("en")
+local L = LANG.GetLanguageTableReference("en")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Necromancer"
@@ -24,10 +24,10 @@ L["zombie_pistol_name"] = "Zombie Deagle"
 
 L["revived_by_necromancer"] = "You are revived by {name} as a necromancer zombie. Prepare yourself!"
 L["necrodefi_hold_key_to_revive"] = "Hold [{key}] to revive player as a zombie"
-L["necrodefi_revive_progress"] = "Time left: {time}s"
+L["necrodefi_revive_progress"] = "Time left until revival: {time}s"
 L["necrodefi_charging"] = "Defibrillator is recharging, please wait"
 L["necrodefi_player_already_reviving"] = "Player is already reviving"
-L["necrodefi_error_no_space"] = "There is insufficient room available for this revival attempt."
+L["necrodefi_error_no_space"] = "Not enough space to revive this player."
 L["necrodefi_error_too_fast"] = "Defibrillator is recharging. Please wait."
 L["necrodefi_error_lost_target"] = "You lost your target. Please try again."
 L["necrodefi_error_no_valid_ply"] = "You can't revive this player since they are no longer valid."
@@ -35,8 +35,15 @@ L["necrodefi_error_already_reviving"] = "You can't revive this player since they
 L["necrodefi_error_failed"] = "Revival attempt failed. Please try again."
 L["necrodefi_error_zombie"] = "You can't revive a zombie."
 L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+L["necrodefi_error_player_disconnected"] = "You can't revive this player since they have disconnected."
 
 L["tooltip_necro_revive_score"] = "Necro revival: {score}"
 L["necro_revive_score"] = "Necro Revival:"
 L["title_event_necro_revive"] = "A player became a zombie"
 L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
+
+L["label_necrodefi_ammo"] = "Defi ammo multiplier"
+L["label_necrodefi_revive_time"] = "Defi revival time"
+L["label_necrodefi_error_time"] = "Defi recharging time"
+L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
+L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"

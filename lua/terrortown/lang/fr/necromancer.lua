@@ -35,8 +35,15 @@ L["necrodefi_error_already_reviving"] = "Vous ne pouvez pas réanimer ce joueur 
 L["necrodefi_error_failed"] = "La tentative de réanimation a échoué. Veuillez réessayer."
 L["necrodefi_error_zombie"] = "Vous ne pouvez pas faire revivre un zombie."
 L["necrodefi_error_player_alive"] = "Vous ne pouvez pas réanimer ce joueur parce qu'il est déjà réanimé."
+--L["necrodefi_error_player_disconnected"] = "You can't revive this player since they have disconnected."
 
 L["tooltip_necro_revive_score"] = "Réanimation du Nécro: {score}"
 L["necro_revive_score"] = "Réanimation du Nécro:"
 L["title_event_necro_revive"] = "Un joueur est devenue un zombie"
 L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et l'a transformé en zombie."
+
+--L["label_necrodefi_ammo"] = "Defi ammo multiplier"
+--L["label_necrodefi_revive_time"] = "Defi revival time"
+--L["label_necrodefi_error_time"] = "Defi recharging time"
+--L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
+--L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"

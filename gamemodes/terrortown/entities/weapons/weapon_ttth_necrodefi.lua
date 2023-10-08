@@ -16,6 +16,7 @@ local DEFI_ERROR_ALREADY_REVIVING = 5
 local DEFI_ERROR_FAILED = 6
 local DEFI_ERROR_ZOMBIE = 7
 local DEFI_ERROR_PLAYER_ALIVE = 8
+local DEFI_ERROR_PLAYER_DISCONNECTED = 9
 
 SWEP.Base = "weapon_tttbase"
 
@@ -90,7 +91,7 @@ if SERVER then
 		self.defiTimer = nil
 	end
 
-	function SWEP:Error(type)
+	function SWEP:Error(type, errorEnt)
 		self:SetState(DEFI_CHARGE)
 
 		self.defiTarget = nil
@@ -103,6 +104,10 @@ if SERVER then
 
 			self:Reset()
 		end)
+
+		-- In case people want to do something about this for themselves, presuambly they want to suppress the Message call.
+		local defibErrorResult = hook.Run("TTT2NecroDefibError", type, self, self:GetOwner(), errorEnt)
+		if defibErrorResult ~= nil then return end
 
 		self:Message(type)
 	end
@@ -126,6 +131,10 @@ if SERVER then
 			LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
 		elseif type == DEFI_ERROR_PLAYER_ALIVE then
 			LANG.Msg(owner, "necrodefi_error_player_alive", nil, MSG_MSTACK_WARN)
+		elseif type == DEFI_ERROR_PLAYER_DISCONNECTED then
+			LANG.Msg(owner, "necrodefi_error_player_disconnected", nil, MSG_MSTACK_WARN)
+		elseif isstring(type) then
+			LANG.Msg(owner, type, nil, MSG_MSTACK_WARN)
 		end
 	end
 
@@ -134,19 +143,19 @@ if SERVER then
 		local owner = self:GetOwner()
 
 		if not IsValid(ply) then
-			self:Error(DEFI_ERROR_NO_VALID_PLY)
+			self:Error(DEFI_ERROR_NO_VALID_PLY, ragdoll)
 
 			return
 		end
 
 		if ply:IsReviving() then
-			self:Error(DEFI_ERROR_ALREADY_REVIVING)
+			self:Error(DEFI_ERROR_ALREADY_REVIVING, ragdoll)
 
 			return
 		end
 
 		if ply:IsActive() then
-			self:Error(DEFI_ERROR_PLAYER_ALIVE)
+			self:Error(DEFI_ERROR_PLAYER_ALIVE, ragdoll)
 
 			return
 		end
@@ -216,10 +225,10 @@ if SERVER then
 			self:FinishRevival()
 		elseif not owner:KeyDown(IN_ATTACK) or owner:GetEyeTrace(MASK_SHOT_HULL).Entity ~= self.defiTarget then
 			self:CancelRevival()
-			self:Error(DEFI_ERROR_LOST_TARGET)
+			self:Error(DEFI_ERROR_LOST_TARGET, self.defiTarget)
 		elseif target:IsActive() then
 			self:CancelRevival()
-			self:Error(DEFI_ERROR_PLAYER_ALIVE)
+			self:Error(DEFI_ERROR_PLAYER_ALIVE, target)
 		end
 	end
 
@@ -258,22 +267,34 @@ if SERVER then
 			or not CORPSE.IsValidBody(ent)
 		then return end
 
-		local spawnPoint = plyspawn.MakeSpawnPointSafe(CORPSE.GetPlayer(ent), ent:GetPos())
+		local defibAttemptResult = hook.Run("TTT2AttemptNecroDefibPlayer", owner, ent, self)
+		if defibAttemptResult ~= nil then
+			self:Error(nil, ent)
+			return
+		end
+
+		local corpsePlayer = CORPSE.GetPlayer(ent)
+		if not IsValid(corpsePlayer) then
+			self:Error(DEFI_ERROR_PLAYER_DISCONNECTED, ent)
+
+			return
+		end
 
 		if self:GetState() ~= DEFI_IDLE then
-			self:Error(DEFI_ERROR_TOO_FAST)
+			self:Error(DEFI_ERROR_TOO_FAST, ent)
 
 			return
 		end
 
 		if CORPSE.GetPlayer(ent):GetSubRole() == ROLE_ZOMBIE then
-			self:Error(DEFI_ERROR_ZOMBIE)
+			self:Error(DEFI_ERROR_ZOMBIE, ent)
 
 			return
 		end
 
+		local spawnPoint = plyspawn.MakeSpawnPointSafe(corpsePlayer, ent:GetPos())
 		if not spawnPoint then
-			self:Error(DEFI_ERROR_NO_SPACE)
+			self:Error(DEFI_ERROR_NO_SPACE, ent)
 		else
 			self:BeginRevival(ent, trace.PhysicsBone)
 		end

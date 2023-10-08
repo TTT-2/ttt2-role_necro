@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("ru")
+local L = LANG.GetLanguageTableReference("ru")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Некромант"
@@ -40,3 +40,9 @@ L["tooltip_necro_revive_score"] = "Некровозрождение: {score}"
 L["necro_revive_score"] = "Некровозрождение:"
 L["title_event_necro_revive"] = "Игрок стал зомби"
 L["desc_event_necro_revive"] = "{necro} возрождает {zombie} ({zrole} / {zteam}) и превращает в зомби."
+
+--L["label_necrodefi_ammo"] = "Defi ammo multiplier"
+--L["label_necrodefi_revive_time"] = "Defi revival time"
+--L["label_necrodefi_error_time"] = "Defi recharging time"
+--L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
+--L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"

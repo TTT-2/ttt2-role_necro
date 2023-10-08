@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("ja")
+local L = LANG.GetLanguageTableReference("ja")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Necromancer"
@@ -34,9 +34,16 @@ L["necrodefi_error_no_valid_ply"] = "こいつはこのサーバーにいない�
 L["necrodefi_error_already_reviving"] = "一回蘇生された者は蘇生することはできないようだ。"
 L["necrodefi_error_failed"] = "蘇生が中断された。もう一度だ。"
 L["necrodefi_error_zombie"] = "Zombieを蘇生することはできないようだ。"
--- L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+--L["necrodefi_error_player_alive"] = "You can't revive this player, they are already alive."
+--L["necrodefi_error_player_disconnected"] = "You can't revive this player since they have disconnected."
 
 --L["tooltip_necro_revive_score"] = "Necro revival: {score}"
 --L["necro_revive_score"] = "Necro Revival:"
 --L["title_event_necro_revive"] = "A player became a zombie"
 --L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
+
+--L["label_necrodefi_ammo"] = "Defi ammo multiplier"
+--L["label_necrodefi_revive_time"] = "Defi revival time"
+--L["label_necrodefi_error_time"] = "Defi recharging time"
+--L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
+--L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
