@@ -53,31 +53,17 @@ function ROLE:PreInitialize()
 end
 
 if SERVER then
-	-- Special Necromancer Radar, it only shows dead bodies
-	ROLE.CustomRadar = function(ply)
-		local targets = {}
-		local scan_ents = ents.FindByClass("prop_ragdoll")
-		local mathRound = math.Round
+	hook.Add("TTTOnCorpseCreated", "NecroAddedDeadBody", function(rag, ply)
+		if not IsValid(rag) or not IsValid(ply) then return end
 
-		for _, t in ipairs(scan_ents) do
-			if not t.player_ragdoll then continue end
+		markerVision.RegisterEntity(rag, ROLE_NECROMANCER, VISIBLE_FOR_ROLE)
+	end)
 
-			local pos = t:LocalToWorld(t:OBBCenter())
+	hook.Add("EntityRemoved", "NecroRemovedDeadBody", function(ent)
+		if not IsValid(ent) or ent:GetClass() ~= "prop_ragdoll" then return end
 
-			pos.x = mathRound(pos.x)
-			pos.y = mathRound(pos.y)
-			pos.z = mathRound(pos.z)
-
-			targets[#targets + 1] = {
-				subrole = -1,
-				pos = pos
-			}
-		end
-
-		return targets
-	end
-
-	ROLE.radarTime = 15
+		markerVision.RemoveEntity(ent)
+	end)
 
 	-- modify roles table of rolesetup addon
 	hook.Add("TTTAModifyRolesTable", "ModifyRoleNecroToInno", function(rolesTable)
@@ -92,13 +78,11 @@ if SERVER then
 	-- Give Loadout on respawn and rolechange
 	function ROLE:GiveRoleLoadout(ply, isRoleChange)
 		ply:GiveEquipmentWeapon("weapon_ttth_necrodefi")
-		ply:GiveEquipmentItem("item_ttt_radar")
 	end
 
 	-- Remove Loadout on death and rolechange
 	function ROLE:RemoveRoleLoadout(ply, isRoleChange)
 		ply:StripWeapon("weapon_ttth_necrodefi")
-		ply:RemoveEquipmentItem("item_ttt_radar")
 	end
 
 	-- make sure that jackal and necro can not spawn together
@@ -141,4 +125,26 @@ if CLIENT then
 			decimal = 1
 		})
 	end
+
+	local TryT = LANG.TryTranslation
+	local ParT = LANG.GetParamTranslation
+
+	local materialCorpse = Material("vgui/ttt/tid/tid_big_corpse")
+
+	hook.Add("TTT2RenderMarkerVisionInfo", "HUDDrawMarkerVisionNecroCorpse", function(mvData)
+		local client = LocalPlayer()
+		local ent = mvData:GetEntity()
+
+		if not client:IsTerror() or not IsValid(ent) or ent:GetClass() ~= "prop_ragdoll" then return end
+
+		local distance = math.Round(util.HammerUnitsToMeters(mvData:GetEntityDistance()), 1)
+
+		mvData:EnableText()
+
+		mvData:AddIcon(materialCorpse)
+		mvData:SetTitle(ParT("necro_corpse_player", {nick = CORPSE.GetPlayerNick(ent, "---")}))
+
+		mvData:AddDescriptionLine(ParT("marker_vision_distance", {distance = distance}))
+		mvData:AddDescriptionLine(TryT("marker_vision_visible_for_" .. markerVision.GetVisibleFor(ent)), COLOR_SLATEGRAY)
+	end)
 end
