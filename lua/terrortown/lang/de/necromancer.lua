@@ -47,3 +47,5 @@ L["label_necrodefi_revive_time"] = "Dauer der Wiederbelebung"
 L["label_necrodefi_error_time"] = "Pause nach Fehlschlag"
 L["label_zomb_maxhealth_new_zomb"] = "Gesundheit für neue Zombies"
 L["label_zomb_walkspeed"] = "Zombie-Gehen Geschwindigkeitsmultiplikator"
+
+L["marker_corpse_player"] = "Leiche von {nick}"

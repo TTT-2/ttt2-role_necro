@@ -46,3 +46,5 @@ L["desc_event_necro_revive"] = "{necro} возрождает {zombie} ({zrole} /
 --L["label_necrodefi_error_time"] = "Defi recharging time"
 --L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
+
+--L["necro_corpse_player"] = "Corpse of {nick}"

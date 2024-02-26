@@ -47,3 +47,5 @@ L["necrodefi_error_zombie"] = "Zombieを蘇生することはできないよう�
 --L["label_necrodefi_error_time"] = "Defi recharging time"
 --L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
+
+--L["necro_corpse_player"] = "Corpse of {nick}"
