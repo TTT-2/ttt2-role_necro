@@ -303,7 +303,7 @@ if SERVER then
 	net.Receive("RequestNecroRevivalStatus", function(_, requester)
 		local ply = net.ReadEntity()
 
-		if not IsValid(ply) then return end
+		if not IsValid(ply) or not ply.IsReviving then return end
 
 		net.Start("ReceiveNecroRevivalStatus")
 		net.WriteEntity(ply)
