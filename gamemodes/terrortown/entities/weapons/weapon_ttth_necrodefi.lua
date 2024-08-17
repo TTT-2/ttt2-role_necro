@@ -67,9 +67,6 @@ SWEP.Timer = -1
 SWEP.AllowDrop = false
 
 if SERVER then
-	util.AddNetworkString("RequestNecroRevivalStatus")
-	util.AddNetworkString("ReceiveNecroRevivalStatus")
-
 	function SWEP:OnDrop()
 		self.BaseClass.OnDrop(self)
 
@@ -299,17 +296,6 @@ if SERVER then
 			self:BeginRevival(ent, trace.PhysicsBone)
 		end
 	end
-
-	net.Receive("RequestNecroRevivalStatus", function(_, requester)
-		local ply = net.ReadEntity()
-
-		if not IsValid(ply) then return end
-
-		net.Start("ReceiveNecroRevivalStatus")
-		net.WriteEntity(ply)
-		net.WriteBool(ply:IsReviving())
-		net.Send(requester)
-	end)
 end
 
 -- do not play sound when swep is empty
@@ -335,26 +321,6 @@ if CLIENT then
 	end
 
 	local colorGreen = Color(36, 160, 30)
-
-	local function IsPlayerReviving(ply)
-		if not ply.defi_lastRequest or ply.defi_lastRequest < CurTime() + 0.3 then
-			net.Start("RequestNecroRevivalStatus")
-			net.WriteEntity(ply)
-			net.SendToServer()
-
-			ply.defi_lastRequest = CurTime()
-		end
-
-		return ply.defi_isReviving or false
-	end
-
-	net.Receive("ReceiveNecroRevivalStatus", function()
-		local ply = net.ReadEntity()
-
-		if not IsValid(ply) then return end
-
-		ply.defi_isReviving = net.ReadBool()
-	end)
 
 	hook.Add("TTTRenderEntityInfo", "ttt2_necro_defibrillator_display_info", function(tData)
 		local ent = tData:GetEntity()
@@ -383,7 +349,7 @@ if CLIENT then
 
 		local ply = CORPSE.GetPlayer(ent)
 
-		if activeWeapon:GetState() ~= DEFI_BUSY and IsValid(ply) and IsPlayerReviving(ply) then
+		if activeWeapon:GetState() ~= DEFI_BUSY and IsValid(ply) and ply:IsReviving() then
 			tData:AddDescriptionLine(
 				LANG.TryTranslation("necrodefi_player_already_reviving"),
 				COLOR_ORANGE
