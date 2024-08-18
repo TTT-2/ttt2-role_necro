@@ -37,6 +37,10 @@ SWEP.cvars = {
 SWEP.revivalReason = "revived_by_necromancer"
 
 if SERVER then
+    function SWEP:OnDrop()
+        self:Remove()
+    end
+
     function SWEP:OnRevive(ply, owner)
         AddZombie(ply, owner)
     end
