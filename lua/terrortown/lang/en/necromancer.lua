@@ -33,3 +33,8 @@ L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
 
 L["necro_corpse_player"] = "Corpse of {nick}"
+
+L["necrodefi_error_zombie"] = "You can't revive a dead zombie."
+
+L["header_equipment_necrodefi"] = "Additional Necro's Defi Settings"
+L["label_necro_defibrillator_revive_zombies"] = "Allow defibrillating dead zombies"

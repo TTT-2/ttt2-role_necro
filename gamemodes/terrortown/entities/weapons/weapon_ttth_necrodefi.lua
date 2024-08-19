@@ -4,6 +4,8 @@ end
 
 local flags = { FCVAR_NOTIFY, FCVAR_ARCHIVE, FCVAR_REPLICATED }
 
+DEFINE_BASECLASS("weapon_ttt_defibrillator")
+
 SWEP.Base = "weapon_ttt_defibrillator"
 
 if CLIENT then
@@ -34,6 +36,8 @@ SWEP.cvars = {
     resetConfirmation = CreateConVar("ttt_necro_defibrillator_reset_confirm", "0", flags),
 }
 
+local cvReviveZombies = CreateConVar("ttt_necro_defibrillator_revive_zombies", "0", flags)
+
 SWEP.revivalReason = "revived_by_necromancer"
 
 if SERVER then
@@ -43,5 +47,26 @@ if SERVER then
 
     function SWEP:OnRevive(ply, owner)
         AddZombie(ply, owner)
+    end
+
+    function SWEP:OnReviveStart(ply, owener)
+        if not cvReviveZombies:GetBool() and ply:GetSubRole() == ROLE_ZOMBIE then
+            LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
+
+            return false
+        end
+    end
+end
+
+if CLIENT then
+    function SWEP:AddToSettingsMenu(parent)
+        BaseClass.AddToSettingsMenu(self, parent)
+
+        local form = vgui.CreateTTT2Form(parent, "header_equipment_necrodefi")
+
+        form:MakeCheckBox({
+            label = "label_necro_defibrillator_revive_zombies",
+            serverConvar = "ttt_necro_defibrillator_revive_zombies",
+        })
     end
 end
