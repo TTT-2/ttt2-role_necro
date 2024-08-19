@@ -29,7 +29,6 @@ L["revived_by_necromancer"] = "{name}によってZombieとして蘇生中...戦�
 --L["title_event_necro_revive"] = "A player became a zombie"
 --L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
 
---L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
 
 --L["necro_corpse_player"] = "Corpse of {nick}"

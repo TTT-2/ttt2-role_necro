@@ -29,7 +29,6 @@ L["necro_revive_score"] = "Geisterbeschwörung:"
 L["title_event_necro_revive"] = "Ein Spieler wurde zu einem Zombie"
 L["desc_event_necro_revive"] = "{necro} hat {zombie} ({zrole} / {zteam}) wiederbelebt und ihn dabei zu einem Zombie gemacht."
 
-L["label_zomb_maxhealth_new_zomb"] = "Gesundheit für neue Zombies"
 L["label_zomb_walkspeed"] = "Zombie-Gehen Geschwindigkeitsmultiplikator"
 
 L["marker_corpse_player"] = "Leiche von {nick}"

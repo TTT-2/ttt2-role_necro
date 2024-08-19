@@ -34,6 +34,7 @@ SWEP.cvars = {
     errorTime = CreateConVar("ttt_necro_defibrillator_error_time", "1.5", flags),
     successChance = CreateConVar("ttt_necro_defibrillator_success_chance", "100", flags),
     resetConfirmation = CreateConVar("ttt_necro_defibrillator_reset_confirm", "0", flags),
+    revivalHealth = CreateConVar("ttt_necro_defibrillator_revival_health", "75", flags),
 }
 
 local cvReviveZombies = CreateConVar("ttt_necro_defibrillator_revive_zombies", "0", flags)

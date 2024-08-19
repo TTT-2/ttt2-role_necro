@@ -29,7 +29,6 @@ L["necro_revive_score"] = "Réanimation du Nécro:"
 L["title_event_necro_revive"] = "Un joueur est devenue un zombie"
 L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et l'a transformé en zombie."
 
---L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
 
 --L["necro_corpse_player"] = "Corpse of {nick}"

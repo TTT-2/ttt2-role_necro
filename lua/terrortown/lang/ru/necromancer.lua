@@ -29,7 +29,6 @@ L["necro_revive_score"] = "Некровозрождение:"
 L["title_event_necro_revive"] = "Игрок стал зомби"
 L["desc_event_necro_revive"] = "{necro} возрождает {zombie} ({zrole} / {zteam}) и превращает в зомби."
 
---L["label_zomb_maxhealth_new_zomb"] = "Health for new zombies"
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
 
 --L["necro_corpse_player"] = "Corpse of {nick}"
