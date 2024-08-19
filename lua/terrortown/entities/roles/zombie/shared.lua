@@ -3,18 +3,13 @@ if SERVER then
 end
 
 -- CREATE CONVARS
-local walkspeed = CreateConVar("ttt2_zomb_walkspeed", 0.5, { FCVAR_ARCHIVE, FCVAR_NOTIFY })
-
--- SYNC CONVARS <> GLOBAL VARS
-if SERVER then
-    hook.Add("TTT2SyncGlobals", "TTT2ZombieSyncGlobals", function()
-        SetGlobalFloat(walkspeed:GetName(), walkspeed:GetFloat())
-    end)
-
-    cvars.AddChangeCallback(walkspeed:GetName(), function(name, old, new)
-        SetGlobalFloat(walkspeed:GetName(), tonumber(new) == 1)
-    end, walkspeed:GetName())
-end
+local cvWalkspeed =
+    CreateConVar("ttt2_zomb_walkspeed", 0.5, { FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED })
+local cvPlayerModel = CreateConVar(
+    "ttt2_zomb_player_model",
+    "models/player/corpse1.mdl",
+    { FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED }
+)
 
 function ROLE:PreInitialize()
     self.color = Color(68, 28, 44, 255)
@@ -147,7 +142,7 @@ if SERVER then
 
     hook.Add("TTT2UpdateSubrole", "UpdateZombRoleSelect", function(ply, oldSubrole, newSubrole)
         if newSubrole == ROLE_ZOMBIE then
-            ply:SetSubRoleModel("models/player/corpse1.mdl")
+            ply:SetSubRoleModel(cvPlayerModel:GetString())
         elseif oldSubrole == ROLE_ZOMBIE then
             ply:SetSubRoleModel(nil)
         end
@@ -190,7 +185,7 @@ hook.Add("TTTPlayerSpeedModifier", "ZombModifySpeed", function(ply, _, _, noLag)
         return
     end
 
-    noLag[1] = noLag[1] * GetGlobalFloat(walkspeed:GetName(), 0.5)
+    noLag[1] = noLag[1] * cvWalkspeed:GetFloat()
 end)
 
 if CLIENT then
@@ -198,19 +193,20 @@ if CLIENT then
         local form = vgui.CreateTTT2Form(parent, "header_roles_additional")
 
         form:MakeSlider({
-            serverConvar = "ttt2_zomb_maxhealth_new_zomb",
-            label = "label_zomb_maxhealth_new_zomb",
-            min = 10,
-            max = 500,
-            decimal = 0,
-        })
-
-        form:MakeSlider({
             serverConvar = "ttt2_zomb_walkspeed",
             label = "label_zomb_walkspeed",
             min = 0,
             max = 5,
             decimal = 2,
+        })
+
+        form:MakeComboBox({
+            label = "label_zomb_player_model",
+            serverConvar = "ttt2_zomb_player_model",
+            choices = {
+                { title = "models/player/corpse1.mdl", value = "models/player/corpse1.mdl" },
+                { title = "models/player/skeleton.mdl", value = "models/player/skeleton.mdl" },
+            },
         })
     end
 end
