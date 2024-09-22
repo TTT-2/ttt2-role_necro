@@ -51,7 +51,7 @@ if SERVER then
         AddZombie(ply, owner)
     end
 
-    function SWEP:OnReviveStart(ply, owener)
+    function SWEP:OnReviveStart(ply, owner)
         if not cvReviveZombies:GetBool() and ply:GetSubRole() == ROLE_ZOMBIE then
             LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
 
