@@ -2,15 +2,15 @@ local L = LANG.GetLanguageTableReference("fr")
 
 -- GENERAL ROLE LANGUAGE STRINGS
 L[NECROMANCER.name] = "Nécromancien"
-L[NECROMANCER.defaultTeam] = "Team des Nécromanciens"
-L["hilite_win_" .. NECROMANCER.defaultTeam] = "LA TEAM NÉCROMANCIENS A GAGNÉ"
-L["win_" .. NECROMANCER.defaultTeam] = "Le Nécromancien a gagné!"
-L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour! Essayez de faire combattre des joueurs morts à vos côtés!]]
-L["body_found_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
-L["search_role_" .. NECROMANCER.abbr] = "C'était un Nécromancien!"
-L["ev_win_" .. NECROMANCER.defaultTeam] = "Le méchant Nécromancien a gagné le round!"
+L[NECROMANCER.defaultTeam] = "Équipe des Nécromanciens"
+L["hilite_win_" .. NECROMANCER.defaultTeam] = "LES NÉCROMANCIENS ONT GAGNÉ"
+L["win_" .. NECROMANCER.defaultTeam] = "Les Nécromancien ont gagné !"
+L["info_popup_" .. NECROMANCER.name] = [[Maintenant, c'est à votre tour ! Essayez de faire combattre des joueurs morts à vos côtés !]]
+L["body_found_" .. NECROMANCER.abbr] = "C'était un Nécromancien !"
+L["search_role_" .. NECROMANCER.abbr] = "C'était un Nécromancien !"
+L["ev_win_" .. NECROMANCER.defaultTeam] = "Les méchants Nécromanciens ont gagné la partie !"
 L["target_" .. NECROMANCER.name] = "Nécromancien"
-L["ttt2_desc_" .. NECROMANCER.name] = [[Le Nécromancien doit faire revivre les joueurs morts. Si un joueur est réanimé, il ressemble à un zombie et mourra si ses munitions sont vides.]]
+L["ttt2_desc_" .. NECROMANCER.name] = [[Le Nécromancien doit faire revivre les joueurs morts. Si un joueur est réanimé, il devient un zombie et mourra si ses munitions sont vides.]]
 
 L[ZOMBIE.name] = "Zombie"
 L["target_" .. ZOMBIE.name] = "Zombie"
@@ -29,6 +29,6 @@ L["necro_revive_score"] = "Réanimation du Nécro:"
 L["title_event_necro_revive"] = "Un joueur est devenue un zombie"
 L["desc_event_necro_revive"] = "{necro} a réanimé {zombie} ({zrole} / {zteam}) et l'a transformé en zombie."
 
---L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
+L["label_zomb_walkspeed"] = "Vitesse de déplacement des zombies"
 
---L["necro_corpse_player"] = "Corpse of {nick}"
+L["necro_corpse_player"] = "Corps de {nick}"
