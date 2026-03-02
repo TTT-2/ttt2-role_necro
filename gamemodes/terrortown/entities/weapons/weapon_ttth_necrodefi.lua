@@ -44,6 +44,7 @@ SWEP.revivalReason = "revived_by_necromancer"
 
 if SERVER then
     function SWEP:OnDrop()
+        BaseClass.OnDrop(self)
         self:Remove()
     end
 
