@@ -44,7 +44,7 @@ SWEP.revivalReason = "revived_by_necromancer"
 
 if SERVER then
     function SWEP:OnDrop()
-        self:CancelRevival(self.defiPly)
+        BaseClass.OnDrop(self)
         self:Remove()
     end
 
@@ -53,7 +53,6 @@ if SERVER then
     end
 
     function SWEP:OnReviveStart(ply, owner)
-        self.defiPly = ply
         if not cvReviveZombies:GetBool() and ply:GetSubRole() == ROLE_ZOMBIE then
             LANG.Msg(owner, "necrodefi_error_zombie", nil, MSG_MSTACK_WARN)
 
