@@ -18,7 +18,7 @@ if CLIENT then
     SWEP.Icon = "vgui/ttt/icon_defi_necro"
 end
 
-SWEP.Kind = WEAPON_EQUIP2
+SWEP.Kind = WEAPON_ROLE
 SWEP.CanBuy = nil
 SWEP.notBuyable = true
 
