@@ -30,5 +30,11 @@ L["title_event_necro_revive"] = "Ein Spieler wurde zu einem Zombie"
 L["desc_event_necro_revive"] = "{necro} hat {zombie} ({zrole} / {zteam}) wiederbelebt und ihn dabei zu einem Zombie gemacht."
 
 L["label_zomb_walkspeed"] = "Zombie-Gehen Geschwindigkeitsmultiplikator"
+L["label_zomb_player_model"] = "Zombie-Spielermodell"
 
-L["marker_corpse_player"] = "Leiche von {nick}"
+L["necro_corpse_player"] = "Leiche von {nick}"
+
+L["necrodefi_error_zombie"] = "Du kannst keinen toten Zombie wiederbeleben."
+
+L["header_equipment_necrodefi"] = "Zusätzliche Geisterbeschwörer Defi Einstellungen"
+L["label_necro_defibrillator_revive_zombies"] = "Wiederbeleben von toten Zombies erlauben"
