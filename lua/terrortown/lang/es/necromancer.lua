@@ -30,5 +30,11 @@ L["revived_by_necromancer"] = "Estás siendo revivido por {name} como un Zombie 
 --L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
 
 --L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
+--L["label_zomb_player_model"] = "Zombie player model"
 
 --L["necro_corpse_player"] = "Corpse of {nick}"
+
+--L["necrodefi_error_zombie"] = "You can't revive a dead zombie."
+
+--L["header_equipment_necrodefi"] = "Additional Necro's Defi Settings"
+--L["label_necro_defibrillator_revive_zombies"] = "Allow defibrillating dead zombies"

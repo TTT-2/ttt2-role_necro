@@ -30,6 +30,7 @@ L["title_event_necro_revive"] = "A player became a zombie"
 L["desc_event_necro_revive"] = "{necro} has revived {zombie} ({zrole} / {zteam}) and turned them into a zombie."
 
 L["label_zomb_walkspeed"] = "Zombie walkspeed multiplier"
+L["label_zomb_player_model"] = "Zombie player model"
 
 L["necro_corpse_player"] = "Corpse of {nick}"
 
